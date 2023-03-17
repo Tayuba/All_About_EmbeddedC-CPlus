@@ -1,0 +1,29 @@
+!SESSION 2023-03-17 06:28:11.899 -----------------------------------------------
+eclipse.buildId=Version 1.11.2
+java.version=11.0.16
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-03-17 06:28:29.012
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-03-17 06:28:29.068
+!MESSAGE Log4j initialized with config file D:\All_About_EmbeddedC-C++\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-03-17 06:28:31.385
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-17 06:32:08.860
+!MESSAGE Indexed 'ATM0_LED_AddressConstruction' (3 sources, 53 headers) in 1.26 sec: 1,949 declarations; 2,832 references; 0 unresolved inclusions; 2 syntax errors; 2 unresolved names (0.042%)
+
+!ENTRY org.eclipse.ui.ide 4 4 2023-03-17 06:33:45.884
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 2 1 2023-03-17 06:33:45.887
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2023-03-17 06:33:45.887
+!MESSAGE The project description file (.project) for 'ATM0_LED_AddressConstruction' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.core.resources 2 10035 2023-03-17 06:33:46.001
+!MESSAGE The workspace will exit with unsaved changes in this session.
