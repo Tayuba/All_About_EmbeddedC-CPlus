@@ -1,0 +1,13 @@
+/* Goal Turn on LED On Nucleo
+ Port: A
+ Pin : 5*/
+
+#define Periph_Base 		(0x40000000UL)
+#define AHB1_Periph_Offset	(0x0002 0000L)
+#define AHB1_Base			(Periph_Base + AHB1_Periph_Offset)
+#define GPIOA_Offset		(0x0UL)
+#define RCC_Offset 			(0x3800UL)
+#define RCC_Base			(AHB1_Base + RCC_Offset)
+#define RCC_AHBEN_R_Offset	(0x30)
+#define RCC_AHBEN_R_Base	(RCC_Base + RCC_AHBEN_R_Offset)
+#define GPIOA_EN			(1UL<<0)

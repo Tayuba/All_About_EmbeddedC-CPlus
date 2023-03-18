@@ -1,0 +1,21 @@
+17:18:56 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "ATM_ConstructingAdressLED.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATM_ConstructingAdressLED\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATM_ConstructingAdressLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ATM_ConstructingAdressLED.elf
+ 
+arm-none-eabi-size   ATM_ConstructingAdressLED.elf 
+arm-none-eabi-objdump -h -S  ATM_ConstructingAdressLED.elf  > "ATM_ConstructingAdressLED.list"
+   text	   data	    bss	    dec	    hex	filename
+    744	      8	   1568	   2320	    910	ATM_ConstructingAdressLED.elf
+Finished building: default.size.stdout
+ 
+Finished building: ATM_ConstructingAdressLED.list
+ 
+17:18:59 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED ****
+make -j16 all 
+arm-none-eabi-size   ATM_ConstructingAdressLED.elf 
+   text	   data	    bss	    dec	    hex	filename
+    744	      8	   1568	   2320	    910	ATM_ConstructingAdressLED.elf
+Finished building: default.size.stdout
+ 
