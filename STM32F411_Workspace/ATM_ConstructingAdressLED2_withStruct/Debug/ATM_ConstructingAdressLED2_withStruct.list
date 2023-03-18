@@ -79,7 +79,7 @@ Disassembly of section .text:
 080001d8 <main>:
 }GPIO_TypeDef;
 
-#define RCC 									((RCC_TypeDef*)RCC_Base)
+#define RCC 								((RCC_TypeDef*)RCC_Base)
 #define GPIOA 								((GPIO_TypeDef*)GPIOA_Base)
 int main(void)
 {

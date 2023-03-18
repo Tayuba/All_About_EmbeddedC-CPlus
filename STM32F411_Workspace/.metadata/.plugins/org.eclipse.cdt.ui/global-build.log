@@ -1,18 +1,18 @@
-19:34:00 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED2_withStruct ****
+21:26:19 **** Incremental Build of configuration Debug for project ATM_GPIO_Output ****
 make -j16 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "ATM_ConstructingAdressLED2_withStruct.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATM_ConstructingAdressLED2_withStruct\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATM_ConstructingAdressLED2_withStruct.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: ATM_ConstructingAdressLED2_withStruct.elf
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "ATM_GPIO_Output.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATM_GPIO_Output\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATM_GPIO_Output.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ATM_GPIO_Output.elf
  
-arm-none-eabi-size   ATM_ConstructingAdressLED2_withStruct.elf 
-arm-none-eabi-objdump -h -S  ATM_ConstructingAdressLED2_withStruct.elf  > "ATM_ConstructingAdressLED2_withStruct.list"
+arm-none-eabi-size   ATM_GPIO_Output.elf 
+arm-none-eabi-objdump -h -S  ATM_GPIO_Output.elf  > "ATM_GPIO_Output.list"
    text	   data	    bss	    dec	    hex	filename
-    728	      8	   1568	   2304	    900	ATM_ConstructingAdressLED2_withStruct.elf
+    728	      8	   1568	   2304	    900	ATM_GPIO_Output.elf
 Finished building: default.size.stdout
  
-Finished building: ATM_ConstructingAdressLED2_withStruct.list
+Finished building: ATM_GPIO_Output.list
  
-19:34:03 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED ****
+21:26:22 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED ****
 make -j16 all 
 arm-none-eabi-size   ATM_ConstructingAdressLED.elf 
    text	   data	    bss	    dec	    hex	filename

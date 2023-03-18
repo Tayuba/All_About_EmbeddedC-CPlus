@@ -294,3 +294,6 @@ Please upgrade the ST-LINK firmware using the upgrade tool. Reconnect ST-LINK an
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-03-18 18:23:19.404
 !MESSAGE Indexed 'ATM_ConstructingAdressLED2_withStruct' (3 sources, 53 headers) in 0.384 sec: 1,950 declarations; 2,863 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.042%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-18 20:57:02.009
+!MESSAGE Indexed 'ATM_GPIO_Output' (3 sources, 53 headers) in 0.148 sec: 1,949 declarations; 2,832 references; 0 unresolved inclusions; 2 syntax errors; 2 unresolved names (0.042%)
