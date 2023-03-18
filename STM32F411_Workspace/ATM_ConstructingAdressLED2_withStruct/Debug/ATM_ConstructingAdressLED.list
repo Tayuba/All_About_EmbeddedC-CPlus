@@ -77,8 +77,8 @@ Disassembly of section .text:
  80001d4:	080002d0 	.word	0x080002d0
 
 080001d8 <main>:
-#define Pin5										 (1UL<<5)
-#define LED_PIN								 Pin5
+#define Pin5										(1UL<<5)
+#define LED_PIN								Pin5
 
 
 int main(void)

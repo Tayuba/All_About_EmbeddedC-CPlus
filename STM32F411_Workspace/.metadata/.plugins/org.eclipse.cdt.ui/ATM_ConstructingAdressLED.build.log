@@ -1,4 +1,4 @@
-17:18:59 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED ****
+19:34:03 **** Incremental Build of configuration Debug for project ATM_ConstructingAdressLED ****
 make -j16 all 
 arm-none-eabi-size   ATM_ConstructingAdressLED.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   ATM_ConstructingAdressLED.elf
 Finished building: default.size.stdout
  
 
-17:19:00 Build Finished. 0 errors, 0 warnings. (took 166ms)
+19:34:03 Build Finished. 0 errors, 0 warnings. (took 158ms)
 

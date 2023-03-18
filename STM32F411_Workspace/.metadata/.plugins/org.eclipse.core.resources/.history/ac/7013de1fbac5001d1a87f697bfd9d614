@@ -34,8 +34,8 @@
 #define GPIO_R_ODR						(*(volatile unsigned int *)(GPIOA_Base + GPIO_R_ODR_Offset))
 
 //Setting Pin 5 to 1
-#define Pin5										 (1UL<<5)
-#define LED_PIN								 Pin5
+#define Pin5										(1UL<<5)
+#define LED_PIN								Pin5
 
 
 int main(void)

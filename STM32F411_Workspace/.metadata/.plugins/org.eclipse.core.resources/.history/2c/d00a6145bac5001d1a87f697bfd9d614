@@ -1,8 +1,4 @@
-/* Goal Turn on LED On Nucleo
- From the nucleo board user guide, it states that LED is connected to
- Port: A
- Pin : 5*/
-
+#include <stdint.h>
 //Peripheral base address from the board
 #define Periph_Base 						(0x40000000UL)
 
@@ -34,22 +30,41 @@
 #define GPIO_R_ODR						(*(volatile unsigned int *)(GPIOA_Base + GPIO_R_ODR_Offset))
 
 //Setting Pin 5 to 1
-#define Pin5										 (1UL<<5)
-#define LED_PIN								 Pin5
+#define Pin5										(1UL<<5)
+#define LED_PIN								Pin5
+
+typedef struct
+{
+	volatile unit32_t Dummy[12];
+	volatile unit32_t AHBIENR;
+}RCC_TypeDef;
 
 
+typedef struct
+{
+	volatile unit32_t MODER;
+	volatile unit32_t Dummy[4];
+	volatile unit32_t ODR;
+}GPIO_TypeDef;
+
+#define RCC 									((RCC_TypeDef*)RCC_Base)
+#define GPIOA 								((GPIO_TypeDef*)GPIOA_Base)
 int main(void)
 {
-	RCC_AHBEN_R  |= GPIOA_EN;
-	GPIOA_Mode_R	  |=  (1U<<10);
-	GPIOA_Mode_R	  &=  ~(1U<<11);
+//	RCC_AHBEN_R  |= GPIOA_EN;
+//	GPIOA_Mode_R	  |=  (1U<<10);
+//	GPIOA_Mode_R	  &=  ~(1U<<11);
+	RCC->AHBIENR  |= GPIOA_EN;
+	GPIOA->AHBIENR &=  ~(1U<<11);
+
 
 //	Enable clock
 //	Set PA5 as output
 	while(1)
 	{
 		//		Turn on LED
-		GPIO_R_ODR	 ^=  LED_PIN;
+//		GPIO_R_ODR	 ^=  LED_PIN;
+		GPIOA->ODR ^=  LED_PIN;
 		for (int i =0; i<100000; i++){}
 
 
