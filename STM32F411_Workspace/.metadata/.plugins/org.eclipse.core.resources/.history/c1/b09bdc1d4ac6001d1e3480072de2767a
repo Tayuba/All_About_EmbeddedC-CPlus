@@ -21,7 +21,7 @@ void UART2_Write(int at);
 void UART2_Tx_Init(void);
 
 int __io_putchar(int at){
-	UART2_Write(at);
+	UART2_Write(int at);
 	return at;
 
 }
@@ -29,7 +29,7 @@ int main(void) {
 	UART2_Tx_Init();
 	while(1){
 //		UART2_Write('Y');
-		printf("Hello From Ayuba Tahiru Monnie!\n\r");
+		printf("H\n\r");
 	}
 
 }

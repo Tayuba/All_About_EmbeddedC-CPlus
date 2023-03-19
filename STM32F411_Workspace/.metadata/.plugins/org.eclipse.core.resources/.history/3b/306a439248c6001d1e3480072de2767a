@@ -1,6 +1,5 @@
 #include "stm32f4xx.h"
 #include <stdint.h>
-#include <stdio.h>
 
 
 #define GPIOAENR			(1U<<0)
@@ -20,16 +19,10 @@ static uint16_t compute_uart_BD(uint32_t periphClk, uint32_t Baudrate);
 void UART2_Write(int at);
 void UART2_Tx_Init(void);
 
-int __io_putchar(int at){
-	UART2_Write(at);
-	return at;
-
-}
 int main(void) {
 	UART2_Tx_Init();
 	while(1){
-//		UART2_Write('Y');
-		printf("Hello From Ayuba Tahiru Monnie!\n\r");
+		UART2_Write('Y');
 	}
 
 }
@@ -58,7 +51,6 @@ void UART2_Tx_Init(void){
 	USART2->CR1 |= CR1_UE;
 
 }
-
 
 void UART2_Write(int at){
 //	check if transmit data register is free or empty
