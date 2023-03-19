@@ -1,10 +1,10 @@
-12:36:09 **** Incremental Build of configuration Debug for project ATM_UART_Tx ****
+17:51:09 **** Incremental Build of configuration Debug for project ATM_UART_Tx ****
 make -j16 all 
 arm-none-eabi-size   ATM_UART_Tx.elf 
    text	   data	    bss	    dec	    hex	filename
-   5540	    108	   1588	   7236	   1c44	ATM_UART_Tx.elf
+   5560	    108	   1588	   7256	   1c58	ATM_UART_Tx.elf
 Finished building: default.size.stdout
  
 
-12:36:09 Build Finished. 0 errors, 0 warnings. (took 169ms)
+17:51:09 Build Finished. 0 errors, 0 warnings. (took 185ms)
 
