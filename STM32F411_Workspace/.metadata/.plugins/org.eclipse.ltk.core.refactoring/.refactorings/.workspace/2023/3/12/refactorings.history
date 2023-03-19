@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ATM_GPIO_Output1_SET_RESET_withBTN&apos; to &apos;ATM_GPIO_Output1_SET_RESET&apos;" description="Rename resource &apos;ATM_GPIO_Output1_SET_RESET_withBTN&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/ATM_GPIO_Output1_SET_RESET_withBTN" name="ATM_GPIO_Output1_SET_RESET" stamp="1679209888611" updateReferences="true"/>
+</session>

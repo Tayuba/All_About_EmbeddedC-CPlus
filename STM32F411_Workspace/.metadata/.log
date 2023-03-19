@@ -297,3 +297,142 @@ Please upgrade the ST-LINK firmware using the upgrade tool. Reconnect ST-LINK an
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-03-18 20:57:02.009
 !MESSAGE Indexed 'ATM_GPIO_Output' (3 sources, 53 headers) in 0.148 sec: 1,949 declarations; 2,832 references; 0 unresolved inclusions; 2 syntax errors; 2 unresolved names (0.042%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-18 21:28:46.688
+!MESSAGE Indexed 'ATM_GPIO_Output1_SET_RESET' (3 sources, 62 headers) in 0.421 sec: 3,047 declarations; 5,053 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.025%)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 10004 2023-03-18 22:11:32.264
+!MESSAGE Failed to execute MI command:
+-stack-list-frames 0 0
+Error message from debugger back end:
+Invalid thread id: 1
+!STACK 0
+java.lang.Exception: Invalid thread id: 1
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
+
+!ENTRY org.eclipse.core.jobs 4 2 2023-03-18 22:13:34.868
+!MESSAGE An internal error occurred during: "Suspend monitor job.".
+!STACK 0
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@7cd19def[Not completed, task = java.util.concurrent.Executors$RunnableAdapter@2da8ff26[Wrapped task = org.eclipse.cdt.dsf.gdb.service.GDBRunControl_7_12$MonitorSuspendJob$2@13d51657]] rejected from org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor@22e623ef[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 3038]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2055)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:825)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:340)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:562)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:450)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.submit(ScheduledThreadPoolExecutor.java:715)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.submit(DefaultDsfExecutor.java:482)
+	at org.eclipse.cdt.dsf.gdb.service.GDBRunControl_7_12$MonitorSuspendJob.run(GDBRunControl_7_12.java:358)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2023-03-18 22:14:25.721 -----------------------------------------------
+eclipse.buildId=Version 1.11.2
+java.version=11.0.16
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-03-18 22:14:42.968
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-03-18 22:14:43.030
+!MESSAGE Log4j initialized with config file D:\All_About_EmbeddedC-C++\STM32F411_Workspace\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-03-18 22:14:47.707
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-18 22:32:27.857
+!MESSAGE Indexed 'ATM_GPIO_Output1_SET_RESET_withBTN' (3 sources, 62 headers) in 0.729 sec: 3,046 declarations; 5,084 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.025%)
+!SESSION 2023-03-18 22:48:05.541 -----------------------------------------------
+eclipse.buildId=Version 1.11.2
+java.version=11.0.16
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-03-18 22:48:12.365
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-03-18 22:48:12.419
+!MESSAGE Log4j initialized with config file D:\All_About_EmbeddedC-C++\STM32F411_Workspace\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-03-18 22:48:17.188
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-18 22:54:04.092
+!MESSAGE Indexed 'ATM_PushBTN' (3 sources, 53 headers) in 0.745 sec: 1,949 declarations; 2,832 references; 0 unresolved inclusions; 2 syntax errors; 2 unresolved names (0.042%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-18 23:17:27.896
+!MESSAGE Indexed 'ATM_PushBTN' (3 sources, 53 headers) in 0.154 sec: 1,949 declarations; 2,836 references; 1 unresolved inclusions; 1 syntax errors; 20 unresolved names (0.42%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-18 23:17:35.864
+!MESSAGE Indexed 'ATM_PushBTN' (3 sources, 62 headers) in 0.467 sec: 3,046 declarations; 5,084 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.025%)
+
+!ENTRY org.eclipse.core.resources 4 566 2023-03-18 23:23:41.847
+!MESSAGE Workspace was not properly initialized or has already shutdown.
+!SESSION 2023-03-19 08:05:32.608 -----------------------------------------------
+eclipse.buildId=Version 1.11.2
+java.version=11.0.16
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-03-19 08:05:48.906
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-03-19 08:05:48.989
+!MESSAGE Log4j initialized with config file D:\All_About_EmbeddedC-C++\STM32F411_Workspace\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-03-19 08:05:58.986
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-19 08:11:29.817
+!MESSAGE Indexed 'ATM_GPIO_Output1_SET_RESET' (3 sources, 62 headers) in 0.784 sec: 3,046 declarations; 5,076 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.025%)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2023-03-19 08:12:56.796
+!MESSAGE Error in final launch sequence:
+
+Failed to execute MI command:
+load D:\\All_About_EmbeddedC-C++\\STM32F411_Workspace\\ATM_GPIO_Output1_SET_RESET\\Debug\\ATM_GPIO_Output1_SET_RESET.elf 
+
+Error message from debugger back end:
+Error finishing flash operation
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+load D:\\All_About_EmbeddedC-C++\\STM32F411_Workspace\\ATM_GPIO_Output1_SET_RESET\\Debug\\ATM_GPIO_Output1_SET_RESET.elf 
+
+Error message from debugger back end:
+Error finishing flash operation
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:112)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:252)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
+	at com.st.stm32cube.ide.mcu.debug.launch.DSFDelegate.launch(DSFDelegate.java:326)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:803)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:716)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1021)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$2.run(DebugUIPlugin.java:1224)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Contains: Failed to execute MI command:
+load D:\\All_About_EmbeddedC-C++\\STM32F411_Workspace\\ATM_GPIO_Output1_SET_RESET\\Debug\\ATM_GPIO_Output1_SET_RESET.elf 
+
+Error message from debugger back end:
+Error finishing flash operation
+java.lang.Exception: Error finishing flash operation
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
+!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2023-03-19 08:12:56.797
+!MESSAGE Failed to execute MI command:
+load D:\\All_About_EmbeddedC-C++\\STM32F411_Workspace\\ATM_GPIO_Output1_SET_RESET\\Debug\\ATM_GPIO_Output1_SET_RESET.elf 
+
+Error message from debugger back end:
+Error finishing flash operation
+!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2023-03-19 08:12:56.797
+!MESSAGE Failed to execute MI command:
+load D:\\All_About_EmbeddedC-C++\\STM32F411_Workspace\\ATM_GPIO_Output1_SET_RESET\\Debug\\ATM_GPIO_Output1_SET_RESET.elf 
+
+Error message from debugger back end:
+Error finishing flash operation
+!STACK 0
+java.lang.Exception: Error finishing flash operation
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
