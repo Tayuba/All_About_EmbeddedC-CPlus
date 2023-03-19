@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_ConstructingAdressLED Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_GPIO_Output Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_PushBTN
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_ConstructingAdressLED Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_GPIO_Output Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_PushBTN,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_UART_Tx
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_ConstructingAdressLED\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ATM_ConstructingAdressLED\ Debug/activeLaunchTarget=null\:---

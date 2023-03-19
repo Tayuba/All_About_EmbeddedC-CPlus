@@ -14,6 +14,7 @@
 
 
 int main(void) {
+//	Enable bus lines
 	RCC->AHB1ENR |= GPIOAENR;
 	RCC->AHB1ENR |= GPIOCENR;
 
