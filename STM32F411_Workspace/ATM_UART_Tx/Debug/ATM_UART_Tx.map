@@ -1121,7 +1121,7 @@ LOAD c:/st/stm32cubeide_1.11.2/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x00000000000013ff      0x4ef ./Src/sysmem.o
  .debug_line    0x00000000000018ee       0x84 ./Startup/startup_stm32f411retx.o
 
-.debug_str      0x0000000000000000    0x5530d
+.debug_str      0x0000000000000000    0x552cc
  .debug_str     0x0000000000000000    0x4faaf ./Src/UART.o
                                       0x4fc26 (size before relaxing)
  .debug_str     0x000000000004faaf     0x4024 ./Src/main.o
@@ -1130,7 +1130,8 @@ LOAD c:/st/stm32cubeide_1.11.2/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
                                        0x8a85 (size before relaxing)
  .debug_str     0x000000000005522b       0x70 ./Src/sysmem.o
                                        0x5dc1 (size before relaxing)
- .debug_str     0x000000000005529b       0x72 ./Startup/startup_stm32f411retx.o
+ .debug_str     0x000000000005529b       0x31 ./Startup/startup_stm32f411retx.o
+                                         0x72 (size before relaxing)
 
 .comment        0x0000000000000000       0x50
  .comment       0x0000000000000000       0x50 ./Src/UART.o

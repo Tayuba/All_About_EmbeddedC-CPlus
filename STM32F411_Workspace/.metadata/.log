@@ -439,3 +439,9 @@ java.lang.Exception: Error finishing flash operation
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-03-19 10:21:46.561
 !MESSAGE Indexed 'ATM_UART_Tx' (3 sources, 62 headers) in 0.479 sec: 3,046 declarations; 5,084 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.025%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-19 17:53:54.809
+!MESSAGE Indexed 'ATM_UART_Rx' (4 sources, 65 headers) in 0.249 sec: 3,218 declarations; 5,271 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.024%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.launch 2 0 2023-03-19 17:54:16.127
+!MESSAGE Won't launch debug session since we failed to locate the binary.

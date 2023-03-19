@@ -1,24 +1,21 @@
-17:51:04 **** Incremental Build of configuration Debug for project ATM_UART_Tx ****
+19:51:53 **** Incremental Build of configuration Debug for project ATM_UART_Rx ****
 make -j16 all 
-arm-none-eabi-gcc "../Src/UART.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/UART.d" -MT"Src/UART.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/UART.o"
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
-arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
-arm-none-eabi-gcc -o "ATM_UART_Tx.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATM_UART_Tx\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATM_UART_Tx.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: ATM_UART_Tx.elf
+arm-none-eabi-gcc -o "ATM_UART_Rx.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATM_UART_Rx\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATM_UART_Rx.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ATM_UART_Rx.elf
  
-arm-none-eabi-size   ATM_UART_Tx.elf 
-arm-none-eabi-objdump -h -S  ATM_UART_Tx.elf  > "ATM_UART_Tx.list"
+arm-none-eabi-size   ATM_UART_Rx.elf 
+arm-none-eabi-objdump -h -S  ATM_UART_Rx.elf  > "ATM_UART_Rx.list"
    text	   data	    bss	    dec	    hex	filename
-   5560	    108	   1588	   7256	   1c58	ATM_UART_Tx.elf
+   1096	      8	   1568	   2672	    a70	ATM_UART_Rx.elf
 Finished building: default.size.stdout
  
-Finished building: ATM_UART_Tx.list
+Finished building: ATM_UART_Rx.list
  
-17:51:09 **** Incremental Build of configuration Debug for project ATM_UART_Tx ****
+19:52:04 **** Incremental Build of configuration Debug for project ATM_UART_Rx ****
 make -j16 all 
-arm-none-eabi-size   ATM_UART_Tx.elf 
+arm-none-eabi-size   ATM_UART_Rx.elf 
    text	   data	    bss	    dec	    hex	filename
-   5560	    108	   1588	   7256	   1c58	ATM_UART_Tx.elf
+   1096	      8	   1568	   2672	    a70	ATM_UART_Rx.elf
 Finished building: default.size.stdout
  
