@@ -1,0 +1,10 @@
+03:02:26 **** Incremental Build of configuration Debug for project ATN_ADC ****
+make -j16 all 
+arm-none-eabi-size   ATN_ADC.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5728	    108	   1588	   7424	   1d00	ATN_ADC.elf
+Finished building: default.size.stdout
+ 
+
+03:02:27 Build Finished. 0 errors, 0 warnings. (took 165ms)
+

@@ -1,0 +1,19 @@
+#include "stm32f4xx.h"
+#include <stdint.h>
+#include <stdio.h>
+#include "UART.h"
+#include "adc.h"
+
+uint32_t sensor_value;
+
+int main(void) {
+	pa1_adc_init();
+	start_conversion();
+	UART2_Tx_Init();
+	while(1){
+		sensor_value = dc_read();
+		printf("Sensor value is %d\n\r", sensor_value);
+
+	}
+}
+

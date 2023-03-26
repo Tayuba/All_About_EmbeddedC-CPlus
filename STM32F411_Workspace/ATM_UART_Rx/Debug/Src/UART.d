@@ -1,4 +1,4 @@
-Src/UART.o: ../Src/UART.c ../Src/UART.h \
+Src/UART.o: ../Src/UART.c ../Inc/UART.h \
  D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h \
  D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include/core_cm4.h \
@@ -7,7 +7,7 @@ Src/UART.o: ../Src/UART.c ../Src/UART.h \
  D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include/cmsis_gcc.h \
  D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include/mpu_armv7.h \
  D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
-../Src/UART.h:
+../Inc/UART.h:
 D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:
 D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include/core_cm4.h:

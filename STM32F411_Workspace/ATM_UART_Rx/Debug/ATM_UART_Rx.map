@@ -706,17 +706,18 @@ LOAD c:/st/stm32cubeide_1.11.2/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_macro   0x000000000000e95d       0x16 ./Src/main.o
  .debug_macro   0x000000000000e973      0x145 ./Src/main.o
 
-.debug_line     0x0000000000000000      0xd01
- .debug_line    0x0000000000000000      0x5c0 ./Src/UART.o
- .debug_line    0x00000000000005c0      0x6bd ./Src/main.o
- .debug_line    0x0000000000000c7d       0x84 ./Startup/startup_stm32f411retx.o
+.debug_line     0x0000000000000000      0xd0f
+ .debug_line    0x0000000000000000      0x5c7 ./Src/UART.o
+ .debug_line    0x00000000000005c7      0x6c4 ./Src/main.o
+ .debug_line    0x0000000000000c8b       0x84 ./Startup/startup_stm32f411retx.o
 
-.debug_str      0x0000000000000000    0x53b9c
+.debug_str      0x0000000000000000    0x53b5b
  .debug_str     0x0000000000000000    0x4fae8 ./Src/UART.o
                                       0x4fc5f (size before relaxing)
  .debug_str     0x000000000004fae8     0x4042 ./Src/main.o
                                       0x53bf4 (size before relaxing)
- .debug_str     0x0000000000053b2a       0x72 ./Startup/startup_stm32f411retx.o
+ .debug_str     0x0000000000053b2a       0x31 ./Startup/startup_stm32f411retx.o
+                                         0x72 (size before relaxing)
 
 .comment        0x0000000000000000       0x50
  .comment       0x0000000000000000       0x50 ./Src/UART.o

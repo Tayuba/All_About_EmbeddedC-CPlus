@@ -1,21 +1,32 @@
-19:51:53 **** Incremental Build of configuration Debug for project ATM_UART_Rx ****
-make -j16 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "ATM_UART_Rx.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATM_UART_Rx\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATM_UART_Rx.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: ATM_UART_Rx.elf
+03:12:21 **** Clean-only build of configuration Debug for project ATN_ADC_Single_Conversion ****
+make -j16 clean 
+rm -rf ./Startup/startup_stm32f411retx.d ./Startup/startup_stm32f411retx.o
+rm -rf ./Src/UART.d ./Src/UART.o ./Src/UART.su ./Src/adc.d ./Src/adc.o ./Src/adc.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+rm -rf ATN_ADC.elf ATN_ADC.list ATN_ADC.map default.size.stdout
  
-arm-none-eabi-size   ATM_UART_Rx.elf 
-arm-none-eabi-objdump -h -S  ATM_UART_Rx.elf  > "ATM_UART_Rx.list"
+03:12:22 **** Build of configuration Debug for project ATN_ADC_Single_Conversion ****
+make -j16 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f411retx.d" -MT"Startup/startup_stm32f411retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f411retx.o" "../Startup/startup_stm32f411retx.s"
+arm-none-eabi-gcc "../Src/UART.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/UART.d" -MT"Src/UART.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/UART.o"
+arm-none-eabi-gcc "../Src/adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/adc.d" -MT"Src/adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/adc.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/All_About_EmbeddedC-C++/STM32F411_Workspace/Chip_headers/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
+arm-none-eabi-gcc -o "ATN_ADC_Single_Conversion.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F411_Workspace\ATN_ADC_Single_Conversion\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ATN_ADC_Single_Conversion.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ATN_ADC_Single_Conversion.elf
+ 
+arm-none-eabi-size   ATN_ADC_Single_Conversion.elf 
+arm-none-eabi-objdump -h -S  ATN_ADC_Single_Conversion.elf  > "ATN_ADC_Single_Conversion.list"
    text	   data	    bss	    dec	    hex	filename
-   1096	      8	   1568	   2672	    a70	ATM_UART_Rx.elf
+   5728	    108	   1588	   7424	   1d00	ATN_ADC_Single_Conversion.elf
 Finished building: default.size.stdout
  
-Finished building: ATM_UART_Rx.list
+Finished building: ATN_ADC_Single_Conversion.list
  
-19:52:04 **** Incremental Build of configuration Debug for project ATM_UART_Rx ****
+03:12:34 **** Incremental Build of configuration Debug for project ATN_ADC_Single_Conversion ****
 make -j16 all 
-arm-none-eabi-size   ATM_UART_Rx.elf 
+arm-none-eabi-size   ATN_ADC_Single_Conversion.elf 
    text	   data	    bss	    dec	    hex	filename
-   1096	      8	   1568	   2672	    a70	ATM_UART_Rx.elf
+   5728	    108	   1588	   7424	   1d00	ATN_ADC_Single_Conversion.elf
 Finished building: default.size.stdout
  

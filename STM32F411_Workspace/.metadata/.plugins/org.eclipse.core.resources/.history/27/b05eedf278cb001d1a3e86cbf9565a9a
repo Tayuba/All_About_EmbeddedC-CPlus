@@ -1,0 +1,15 @@
+#include "stm32f4xx.h"
+#include <stdint.h>
+#include <stdio.h>
+#include "UART.h"
+#include "adc.h"
+
+
+int main(void) {
+	pa1_adc_init();
+	UART2_Tx_Init();
+	while(1){
+
+	}
+}
+
