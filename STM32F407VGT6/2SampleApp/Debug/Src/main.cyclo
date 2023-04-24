@@ -1,0 +1,6 @@
+main.c:10:6:array_fill_numbers	2
+main.c:20:6:display_numbers	2
+main.c:33:6:swap_numbers	1
+main.c:49:6:bubble_sort	5
+main.c:72:6:insertion_sort	4
+main.c:97:5:main	1

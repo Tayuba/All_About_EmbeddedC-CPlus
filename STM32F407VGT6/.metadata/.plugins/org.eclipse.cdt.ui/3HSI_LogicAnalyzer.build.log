@@ -1,0 +1,10 @@
+12:03:57 **** Incremental Build of configuration Debug for project 3HSI_LogicAnalyzer ****
+make -j16 all 
+arm-none-eabi-size   3HSI_LogicAnalyzer.elf 
+   text	   data	    bss	    dec	    hex	filename
+    840	      8	   1568	   2416	    970	3HSI_LogicAnalyzer.elf
+Finished building: default.size.stdout
+ 
+
+12:03:57 Build Finished. 0 errors, 0 warnings. (took 172ms)
+
