@@ -1,0 +1,48 @@
+/*
+ * 2ATM_BTN_LED_on.c
+ *
+ *  Created on: Apr 26, 2023
+ *      Author: ayuba
+ */
+
+
+#include <stdint.h>
+#include "../drivers/Inc/stm32f407xx.h"
+
+#define HIGH		1
+#define BTNPRESSED 	HIGH
+
+void delay(void){
+	for(uint32_t i = 0; i < 250000; i++){};
+}
+
+int main(void)
+{
+	GPIO_Handle_t GPIO_LED, GPIO_BTN;
+	GPIO_LED.pGPIOx = GPIOD;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_12;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinSpeed			= GPIO_OSPEED_H;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinOPType 		= GPIO_OTY_PUSPUL;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PUPD_PULUP;
+
+	GPIO_BTN.pGPIOx = GPIOA;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_INPUT;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinSpeed			= GPIO_OSPEED_H;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PUPD_NO;
+
+	GPIO_PeriphControl(GPIOD, ENABLE);
+	GPIO_Init(&GPIO_LED);
+	GPIO_PeriphControl(GPIOA, ENABLE);
+	GPIO_Init(&GPIO_BTN);
+    /* Loop forever */
+	while(1){
+		if(GPIO_ReadInputPin(GPIOA, GPIO_PIN_NO_0 == BTNPRESSED)){
+			delay();
+			GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
+
+		}
+
+	}
+}
