@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;stm32f407Disco_Drivers/drivers/Inc/stm32f407.h&apos; to &apos;stm32f407xx.h&apos;" description="Rename resource &apos;stm32f407.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="drivers/Inc/stm32f407.h" name="stm32f407xx.h" stamp="1682302668996" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;stm32f407Disco_Drivers/Src/2ATM_btn_LED_on&apos; to &apos;2ATM_btn_LED_on.c&apos;" description="Rename resource &apos;2ATM_btn_LED_on&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/2ATM_btn_LED_on" name="2ATM_btn_LED_on.c" stamp="1682535273204" updateReferences="true"/>
+</session>

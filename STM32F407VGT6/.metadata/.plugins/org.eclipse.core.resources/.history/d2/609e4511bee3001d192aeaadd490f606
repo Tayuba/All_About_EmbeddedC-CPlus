@@ -1,0 +1,137 @@
+/*
+ * stm32f407_GPIO_Driver.c
+ *
+ *  Created on: Apr 24, 2023
+ *      Author: ayuba
+ */
+
+#include "stm32f407_GPIO_Driver.h"
+
+
+// Peripheral Clock setup
+/************************************************************************************************
+ *@func name							- GPIO_PeriphControl
+ *
+ *@brief								- Function to enable or disable peripheral clock for a given GPIO port
+ *
+ *@param1								- Base Address of GPIO peripheral
+ *@param2								- Enable or Disable Macros
+ *
+ *@return								-	none
+ *
+ *@Note									-	none
+ */
+void GPIO_PeriphControl(GPIO_Reg_t *pGPIOx, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		if(pGPIOx == GPIOA){
+			GPIOA_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOB){
+			GPIOB_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOC){
+			GPIOC_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOD){
+			GPIOD_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOE){
+			GPIOE_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOF){
+			GPIOF_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOG){
+			GPIOG_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOH){
+			GPIOH_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOI){
+			GPIOI_PCLK_EN();
+		}
+	}else{
+		if(pGPIOx == GPIOA){
+			GPIOA_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOB){
+			GPIOB_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOC){
+			GPIOC_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOD){
+			GPIOD_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOE){
+			GPIOE_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOF){
+			GPIOF_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOG){
+			GPIOG_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOH){
+			GPIOH_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOI){
+			GPIOI_PCLK_DI();
+		}
+	}
+}
+
+// Initialize and De-Initialize
+/************************************************************************************************
+ *@func name							- GPIO_Init
+ *
+ *@brief								- Function to initialize GPIO
+ *
+ *@param1								- Base Address of GPIO Handle
+ *
+ *@return								-	none
+ *
+ *@Note									-	none
+ */
+void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
+
+}
+/************************************************************************************************
+ *@func name							- GPIO_DeInit
+ *
+ *@brief								- Function to reset or disable GPIO
+ *
+ *@param1								- Base Address of GPIO peripheral
+ *
+ *@return								-	none
+ *
+ *@Note									-	none
+ */
+void GPIO_DeInit(GPIO_Reg_t *pGPIOx){
+
+}
+
+// Read and Write Data
+uint8_t GPIO_ReadInputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
+
+}
+uint16_t GPIO_ReadInputPort(GPIO_Reg_t *pGPIOx){
+
+}
+void GPIO_WriteOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum, uint8_t Val){
+
+}
+void GPIO_WriteOutputPort(GPIO_Reg_t *pGPIOx, uint8_t Val){
+
+}
+void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
+
+}
+
+// Interrupt Configuration and Interrupt Service Routine Handling
+void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis){
+
+}
+void GPIO_InterruptHandling(uint8_t PinNum){
+
+}

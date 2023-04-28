@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:1HelloWorld Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:2SampleApp Debug,org.eclipse.launchbar.core.descriptorType.default\:3HSI_LogicAnalyzer Debug (1),org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:4HSE_LogicAnalyzer
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:stm32f407Disco_Drivers Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:1HelloWorld\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:1HelloWorld\ Debug/activeLaunchTarget=null\:---
@@ -13,9 +13,16 @@ org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:3HSI_LogicAnalyzer\ Debug/activ
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:3HSI_LogicAnalyzer/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:4HSE_LogicAnalyzer/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:4HSE_LogicAnalyzer/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:stm32f407Disco_Drivers\ Debug/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:stm32f407Disco_Drivers\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:stm32f407Disco_Drivers/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:1HelloWorld\ Debug/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:1HelloWorld\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:2SampleApp\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:3HSI_LogicAnalyzer\ Debug\ (1)/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:3HSI_LogicAnalyzer\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:4HSE_LogicAnalyzer\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:stm32f407Disco_Drivers\ Debug\ (1)/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:stm32f407Disco_Drivers\ Debug\ (1)/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:stm32f407Disco_Drivers\ Debug/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:stm32f407Disco_Drivers\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

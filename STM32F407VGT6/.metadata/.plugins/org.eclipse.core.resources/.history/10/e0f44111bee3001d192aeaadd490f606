@@ -1,0 +1,53 @@
+/*
+ * stm32f407_GPIO_Driver.h
+ *
+ *  Created on: Apr 24, 2023
+ *      Author: ayuba
+ */
+
+#ifndef INC_STM32F407_GPIO_DRIVER_H_
+#define INC_STM32F407_GPIO_DRIVER_H_
+
+#include "stm32f407xx.h"
+
+/*
+ * GPIO pin configurable
+ * */
+typedef struct{
+	uint8_t GPIO_PinNumber;
+	uint8_t GPIO_PinMode;
+	uint8_t GPIO_PinPuPdControl;
+	uint8_t GPIO_PinOPType;
+	uint8_t GPIO_PinAlteFuncMode;
+}GPIO_PinConfig;
+/*
+ * GPIOx Handle Structure*
+ */
+typedef struct {
+	GPIO_Reg_t 			*pGPIOx;   						// Holds base address of GPIO port to which the pin belongs
+	GPIO_PinConfig		pGPIO_PinConfig;				// Holds GPIO pin configuration settings
+}GPIO_Handle_t;
+
+/*************************************************************************************************************************
+ * 													APIs Support Driver
+ * ***********************************************************************************************************************/
+
+// Peripheral Clock setup
+void GPIO_PeriphControl(GPIO_Reg_t *pGPIOx, uint8_t EnrDis);
+
+// Initialize and De-Initialize
+void GPIO_Init(GPIO_Handle_t *pGPIOHandle);
+void GPIO_DeInit(GPIO_Reg_t *pGPIOx);
+
+// Read and Write Data
+uint8_t GPIO_ReadInputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum);
+uint16_t GPIO_ReadInputPort(GPIO_Reg_t *pGPIOx);
+void GPIO_WriteOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum, uint8_t Val);
+void GPIO_WriteOutputPort(GPIO_Reg_t *pGPIOx, uint8_t Val);
+void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum);
+
+// Interrupt Configuration and Interrupt Service Routine Handling
+void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis);
+void GPIO_InterruptHandling(uint8_t PinNum);
+
+#endif /* INC_STM32F407_GPIO_DRIVER_H_ */

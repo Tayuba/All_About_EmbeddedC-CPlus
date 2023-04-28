@@ -10,8 +10,20 @@
 
 #include <stdint.h>
 
-
 #define __vo 					volatile
+
+/*PROCESSOR DETAILS, FOR NVIC ISERx AND ICERx REGISTER ADDRESSES*/
+//NVIC ISERx REGISTER ADDRESSES
+#define NVIC_ISERO				((__vo uint32_t *)0xE000E100UL)
+#define NVIC_ISER1				((__vo uint32_t *)0xE000E104UL)
+#define NVIC_ISER2				((__vo uint32_t *)0xE000E108UL)
+//ICERx REGISTER ADDRESSES
+#define NVIC_ICERO				((__vo uint32_t *)0XE000E180UL)
+#define NVIC_ICER1				((__vo uint32_t *)0XE000E184UL)
+#define NVIC_ICER3				((__vo uint32_t *)0XE000E188UL)
+//IPR REGISTER ADDRESSES
+#define NVIC_IPR_BASE_ADDR		((__vo uint32_t *)0xE000E400UL)
+
 
 /* Base addresses of Flash SRAM1, SRAM2 and ROM memories*/
 #define SRAM1_BASE_ADDR			0x20000000UL 		//112KB, main SRAM
@@ -133,6 +145,19 @@ typedef struct{
 //EXTI Peripheral definitions
 #define EXTI 		((EXTI_Reg_t *)EXTI_BASE_ADDR)
 
+/*Register Peripherals of SYSCFG*/
+typedef struct{
+	__vo uint32_t MEMRMP;
+	__vo uint32_t PMC;
+	__vo uint32_t EXTICR[4];
+	__vo uint32_t RESERVED[2];
+	__vo uint32_t CMPCR;
+
+}SYSCFG_Reg_t;
+
+//SYSCFG Peripheral definitions
+#define SYSCFG 		((SYSCFG_Reg_t *)SYSCFG_BASE_ADDR)
+
 /*
  * ENABLE CLOCK FOR VARIOUS PERIPHERALS
  * */
@@ -167,7 +192,6 @@ typedef struct{
 
 //MACRO SYSCFG PERIPHERALS
 #define SYSCFG_PCLK_EN()	(RCC->APB2ENR |= (1 << 14))
-
 
 /*
  * DISABLE CLOCK FOR VARIOUS PERIPHERALS
@@ -221,6 +245,29 @@ typedef struct{
 #define RESET					DISABLE
 #define GPIO_PIN_SET			SET
 #define GPIO_PIN_RESET			RESET
+
+// GPIO base to Port Code Macro
+#define GPIO_BASE_TO_PORTCODE(x)		((x == GPIOA)?  0:\
+										(x ==  GPIOB) ? 1:\
+										(x ==  GPIOC) ? 2:\
+										(x ==  GPIOD) ? 3:\
+										(x ==  GPIOE) ? 4:\
+										(x ==  GPIOF) ? 5:\
+										(x ==  GPIOG) ? 6:\
+										(x ==  GPIOH) ? 7:\
+										(x ==  GPIOI) ? 8:0)
+
+// Interrupt Request (IRQ) Number
+#define IRQ_EXTI0						6
+#define IRQ_EXTI1						7
+#define IRQ_EXTI2						8
+#define IRQ_EXTI3						9
+#define IRQ_EXTI4						10
+#define IRQ_EXTI9_5						23
+#define IRQ_EXTI15_10					40
+
+// Priority amount to be shifted in STM32F407
+#define STM32F407_PR_BIT_IMPLEMENTED	4
 
 #include "stm32f407_GPIO_Driver.h"
 

@@ -1,0 +1,30 @@
+/*
+ * stm32f407_GPIO_Driver.h
+ *
+ *  Created on: Apr 24, 2023
+ *      Author: ayuba
+ */
+
+#ifndef INC_STM32F407_GPIO_DRIVER_H_
+#define INC_STM32F407_GPIO_DRIVER_H_
+
+#include "stm32f407xx.h"
+
+/*
+ * GPIO pin configurable
+ * */
+typedef struct{
+	uint8_t GPIO_PinNumber;
+	uint8_t GPIO_PinMode;
+	uint8_t GPIO_PinPuPdControl;
+	uint8_t GPIO_PinOPType;
+	uint8_t GPIO_PinAlteFuncMode;
+}GPIO_PinConfig;
+/*
+ * GPIOx Handle Structure*
+ */
+typedef struct {
+	GPIO_Reg_t 			*pGPIOx;   						// Holds base address of GPIO port to which the pin belongs
+	GPIO_PinConfig		pGPIO_PinConfig;
+}GPIO_Handle_t;
+#endif /* INC_STM32F407_GPIO_DRIVER_H_ */

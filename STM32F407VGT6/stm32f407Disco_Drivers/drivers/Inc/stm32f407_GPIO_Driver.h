@@ -49,7 +49,8 @@ void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum);
 
 // Interrupt Configuration and Interrupt Service Routine Handling
 void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis);
-void GPIO_InterruptHandling(uint8_t PinNum);
+void GPIO_IRQHandler(uint8_t PinNum);
+void GPIO_InterruptPriorityConfig(uint8_t IRQNum ,uint8_t IRQ_Priority);
 
 /*
  *@GPIO_PIN_MODES
