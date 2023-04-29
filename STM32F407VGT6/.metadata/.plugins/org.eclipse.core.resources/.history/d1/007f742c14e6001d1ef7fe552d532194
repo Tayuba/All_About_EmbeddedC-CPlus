@@ -1,0 +1,55 @@
+/*
+ * 4ATM_Interrupt_LED_ON.c
+ *
+ *  Created on: Apr 28, 2023
+ *      Author: ayuba
+ */
+
+
+#include <stdint.h>
+#include "../drivers/Inc/stm32f407xx.h"
+
+#define LOW			0
+#define BTNPRESSED 	LOW
+
+void delay(void){
+	for(uint32_t i = 0; i < 500000; i++){};
+}
+
+int main(void)
+{	// LED Configuration
+	GPIO_Handle_t GPIO_LED, GPIO_BTN;
+	GPIO_LED.pGPIOx = GPIOA;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_7;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinSpeed			= GPIO_OSPEED_H;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinOPType 		= GPIO_OTY_PUSPUL;
+	GPIO_LED.pGPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PUPD_NO;
+
+	GPIO_PeriphControl(GPIOA, ENABLE);
+	GPIO_Init(&GPIO_LED);
+
+	// Button Configuration
+	GPIO_BTN.pGPIOx = GPIOD;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_5;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_INP_FE_T;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinSpeed			= GPIO_OSPEED_H;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PUPD_PULUP;
+
+
+	GPIO_PeriphControl(GPIOD, ENABLE);
+	GPIO_Init(&GPIO_BTN);
+
+	// IRQ Configuration
+	GPIO_InterruptConfig(IRQ_EXTI9_5, ENABLE);
+	GPIO_InterruptPriorityConfig(IRQ_EXTI9_5, NVIC_IRQ_PRIORITY_15);
+
+	// IRQ Handler
+	void EXTI9_5_IRQHandler(void);
+		GPIO_IRQHandler(GPIO_PIN_NO_5);
+//		delay();
+		GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_7);
+
+
+	return 0;
+}

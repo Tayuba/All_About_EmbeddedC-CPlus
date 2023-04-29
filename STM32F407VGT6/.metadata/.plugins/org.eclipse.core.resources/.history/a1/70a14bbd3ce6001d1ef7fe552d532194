@@ -1,0 +1,311 @@
+/*
+ * stm32f407_GPIO_Driver.c
+ *
+ *  Created on: Apr 24, 2023
+ *      Author: ayuba
+ */
+
+#include "stm32f407_GPIO_Driver.h"
+
+
+// Peripheral Clock setup
+/************************************************************************************************
+ *@func name							- GPIO_PeriphControl
+ *
+ *@brief								- Function to enable or disable peripheral clock for a given GPIO port
+ *
+ *@param1								- Base Address of GPIO peripheral
+ *@param2								- Enable or Disable Macros
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+void GPIO_PeriphControl(GPIO_Reg_t *pGPIOx, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		if(pGPIOx == GPIOA){
+			GPIOA_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOB){
+			GPIOB_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOC){
+			GPIOC_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOD){
+			GPIOD_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOE){
+			GPIOE_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOF){
+			GPIOF_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOG){
+			GPIOG_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOH){
+			GPIOH_PCLK_EN();
+		}
+		else if(pGPIOx == GPIOI){
+			GPIOI_PCLK_EN();
+		}
+	}else{
+		if(pGPIOx == GPIOA){
+			GPIOA_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOB){
+			GPIOB_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOC){
+			GPIOC_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOD){
+			GPIOD_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOE){
+			GPIOE_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOF){
+			GPIOF_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOG){
+			GPIOG_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOH){
+			GPIOH_PCLK_DI();
+		}
+		else if(pGPIOx == GPIOI){
+			GPIOI_PCLK_DI();
+		}
+	}
+}
+
+// Initialize
+/************************************************************************************************
+ *@func name							- GPIO_Init
+ *
+ *@brief								- Function to initialize GPIO
+ *
+ *@param1								- Base Address of GPIO Handle
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
+	uint32_t temp = 0; //hold register mode temporary
+	if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG){
+		//Mode
+		temp = (pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode << (2 * pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber));
+		pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 	    //clearing
+		pGPIOHandle->pGPIOx->MODER |= temp; 														// setting
+
+	}else{
+		pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber);
+		/* Interrupt mode, at peripheral side */
+		if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode == GPIO_MODE_INP_FE_T){
+			// Falling Edge trigger configured
+			EXTI->FTSR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					    // set falling edge
+			EXTI->RTSR &= ~(1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					    // reset rising edge
+
+		}else if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode == GPIO_MODE_INP_RE_T){
+			// Rising Edge trigger configured
+			EXTI->RTSR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					     // set rising edge
+			EXTI->FTSR &= ~(1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					     // reset falling edge
+
+		}else if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode == GPIO_MODE_INP_FERE_T){
+			//  Both Falling and Rising Edge trigger configured
+			EXTI->FTSR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 						 // set falling edge
+			EXTI->RTSR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 						 // set rising edge
+		}
+
+		// Configure GPIO port to selection  in SYSCG
+		uint8_t temp3, temp4;
+		uint8_t portCode = GPIO_BASE_TO_PORTCODE(pGPIOHandle->pGPIOx);								   // REturn the port code(PA...PI for the EXTI register
+		temp3 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber / 4;                                	   // Select which EXTI(0...3) register to Configure
+		temp4 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber % 4;									   // Select which EXTI?(0...15) bit to store values
+		SYSCFG_PCLK_EN();																			   // Enable SYSCFG clock
+		SYSCFG->EXTICR[temp3] |= (portCode << (4 * temp4));											   // Select EXTIx register and the respective bits
+
+		// Interrupt request from line x is not masked
+		EXTI->IMR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber);
+	}
+	temp = 0;
+
+	//Speed
+	temp = (pGPIOHandle->pGPIO_PinConfig.GPIO_PinSpeed << (2 * pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OSPEEDR &= ~(0x3 <<  pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 			  // clearing
+	pGPIOHandle->pGPIOx->OSPEEDR |= temp; 																  // setting
+	temp = 0;
+
+	//Pull up Pull down
+	temp = (pGPIOHandle->pGPIO_PinConfig.GPIO_PinPuPdControl << (2 * pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->PUPDR &= ~(0x3 <<  pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					// clearing
+	pGPIOHandle->pGPIOx->PUPDR |= temp; 																	//setting
+	temp = 0;
+
+	//Output Type
+	temp = (pGPIOHandle->pGPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 <<  pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					 // clearing
+	pGPIOHandle->pGPIOx->OTYPER |= temp; 																	 //setting
+	temp = 0;
+
+	//Alternative Function
+	if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinAlteFuncMode == GPIO_MODE_ALTFUNC){
+		uint8_t temp1, temp2;
+		temp1 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber / 8;
+		temp2 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber % 8;
+		pGPIOHandle->pGPIOx->AFR[temp1] &= ~(pGPIOHandle->pGPIO_PinConfig.GPIO_PinAlteFuncMode << (4 * temp2 )); // clearing
+		pGPIOHandle->pGPIOx->AFR[temp1] |= (pGPIOHandle->pGPIO_PinConfig.GPIO_PinAlteFuncMode << (4 * temp2 ));	 // setting
+	}
+
+}
+// De-Initialize
+/************************************************************************************************
+ *@func name							- GPIO_DeInit
+ *
+ *@brief								- Function to reset or disable GPIO
+ *
+ *@param1								- Base Address of GPIO peripheral
+ *
+ *@return								-	none
+ *
+ *@Note									-	none
+ */
+void GPIO_DeInit(GPIO_Reg_t *pGPIOx){
+	if(pGPIOx == GPIOA){
+		GPIOA_REG_RESET();
+	}
+	else if(pGPIOx == GPIOB){
+		GPIOB_REG_RESET();
+	}
+	else if(pGPIOx == GPIOC){
+		GPIOC_REG_RESET();
+	}
+	else if(pGPIOx == GPIOD){
+		GPIOD_REG_RESET();
+	}
+	else if(pGPIOx == GPIOE){
+		GPIOE_REG_RESET();
+	}
+	else if(pGPIOx == GPIOF){
+		GPIOF_REG_RESET();
+	}
+	else if(pGPIOx == GPIOG){
+		GPIOG_REG_RESET();
+	}
+	else if(pGPIOx == GPIOH){
+		GPIOH_REG_RESET();
+	}
+	else if(pGPIOx == GPIOI){
+		GPIOI_REG_RESET();
+	}
+}
+
+// Read and Write Data
+uint8_t GPIO_ReadInputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
+	uint8_t IDR_value;
+	IDR_value = (uint8_t)(pGPIOx->IDR >> PinNum & 0x00000001);
+	return IDR_value;
+}
+uint16_t GPIO_ReadInputPort(GPIO_Reg_t *pGPIOx){
+	uint16_t PORT_value;
+	PORT_value = (uint16_t)(pGPIOx->IDR);
+	return PORT_value;
+}
+
+// Write Data for Pin or/and  Port
+void GPIO_WriteOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum, uint8_t Val){
+	if(Val == GPIO_PIN_SET){
+		pGPIOx->ODR |= (1 << PinNum);
+	}else{
+		pGPIOx->ODR &= ~(1 << PinNum);
+	}
+}
+void GPIO_WriteOutputPort(GPIO_Reg_t *pGPIOx, uint8_t Val){
+	pGPIOx->ODR = Val;
+}
+void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
+	pGPIOx->ODR ^= (1 << PinNum);
+}
+
+/* Interrupt Configuration and Interrupt Service Routine Handling at processor side.
+ * This configuration is done using Cortex M4 Generic User Guide */
+/************************************************************************************************
+ *@func name							- GPIO_InterruptConfig
+ *
+ *@brief								- Function configures interrupt at the processor side of the peripheral.
+ *
+ *
+ *@param1								- IRQ number of the interrupt been used in the MCU Cortex M4 peripheral
+ *@param2								- Enable variable of the interrupt been used in the MCU Cortex M4 peripheral
+ *
+ *@return								- none
+ *
+ *@Note									- Even though Cortex M4 has 8 Nested Vector Interrupt Controllers available (NVIC),
+ *										  STM32F407 does not use more than three of this NVIC
+ */
+void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		if(IRQNum <= 31){
+			// ISRE0 Register is to be programmed
+			*(NVIC_ISERO) |= (1 << IRQNum);
+
+		} else if(IRQNum >= 31 && IRQNum <64){
+			// ISRE1 Register is to be programmed
+			*(NVIC_ISER1) |= (1 << (IRQNum % 32));
+
+		} else if(IRQNum >= 64 && IRQNum <96){
+			// ISRE2 Register is to be programmed
+			*(NVIC_ISER2) |= (1 << (IRQNum % 64));
+		}
+	}else{
+		if(IRQNum <= 31){
+			// ICRE0 Register is to be programmed
+			*(NVIC_ICERO) |= (1 << (IRQNum % 32));
+
+		} else if(IRQNum >= 31 && IRQNum <64){
+			// ICRE1 Register is to be programmed
+			*(NVIC_ICER1) |= (1 << (IRQNum % 32));
+
+		} else if(IRQNum >= 64 && IRQNum <96){
+			// ICRE2 Register is to be programmed
+			*(NVIC_ICER2) |= (1 << (IRQNum % 64));
+		}
+	}
+}
+
+// Configuration of interrupt priority
+/************************************************************************************************
+ *@func name							- GPIO_InterruptPriorityConfig
+ *
+ *@brief								- Function configures priority for interrupt at the processor side of the peripheral.
+ *
+ *
+ *@param1								- IRQ number of the interrupt been used in the MCU Cortex M4 peripheral
+ *@param2								- IRQ priority of the interrupt been used in the MCU Cortex M4 peripheral
+
+ *
+ *@return								- none
+ *
+ *@Note									- One interrupt priority register is enough since only 3 interrupt set-enable registers are used.
+ *										  One interrupt priority register is divided into four sections, for which each section handles one interrupt set-enable registers.
+ *										  Priority bits implementation are done in most-significant bit of the section of the register, and the number of implementation is
+ *										  processor specific, so kindly check MCU providers ref. manual
+ */
+void GPIO_InterruptPriorityConfig(uint8_t IRQNum, uint8_t IRQ_Priority){
+	uint8_t iprx 		 = IRQNum / 4; 																			// To select interrupt priority register
+	uint8_t iprx_section  = IRQNum % 4;       																	// To select section of selected interrupt priority register above
+	uint8_t amount_shift = (8 * iprx_section) + (8 - STM32F407_PR_BIT_IMPLEMENTED); 							// STM32F407_PR_BIT_IMPLEMENTED has 4 bit implementation of priority, MCU such as TI.
+	*(NVIC_IPR_BASE_ADDR + (iprx * 4)) |= (IRQ_Priority << amount_shift);
+}
+
+// Interrupt Service Routine
+void GPIO_IRQHandler(uint8_t PinNum){
+	// checking the EXTI PR register corresponding to the pin number, set or not
+	if(EXTI->PR & (1 << PinNum)){
+		// Clear if set
+		EXTI->PR |= (1 << PinNum);
+	}
+}

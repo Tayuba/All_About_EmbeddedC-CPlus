@@ -48,7 +48,7 @@ void GPIO_WriteOutputPort(GPIO_Reg_t *pGPIOx, uint8_t Val);
 void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum);
 
 // Interrupt Configuration and Interrupt Service Routine Handling
-void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis);
+void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t EnrDis);
 void GPIO_IRQHandler(uint8_t PinNum);
 void GPIO_InterruptPriorityConfig(uint8_t IRQNum ,uint8_t IRQ_Priority);
 
@@ -109,5 +109,23 @@ void GPIO_InterruptPriorityConfig(uint8_t IRQNum ,uint8_t IRQ_Priority);
 #define GPIO_PIN_NO_14					14
 #define GPIO_PIN_NO_15					15
 
+
+//NVIC Priority Macros
+#define NVIC_IRQ_PRIORITY_0				0
+#define NVIC_IRQ_PRIORITY_1				1
+#define NVIC_IRQ_PRIORITY_2				2
+#define NVIC_IRQ_PRIORITY_3				3
+#define NVIC_IRQ_PRIORITY_4				4
+#define NVIC_IRQ_PRIORITY_5				5
+#define NVIC_IRQ_PRIORITY_6				6
+#define NVIC_IRQ_PRIORITY_7				7
+#define NVIC_IRQ_PRIORITY_8				8
+#define NVIC_IRQ_PRIORITY_9				9
+#define NVIC_IRQ_PRIORITY_10			10
+#define NVIC_IRQ_PRIORITY_11			11
+#define NVIC_IRQ_PRIORITY_12			12
+#define NVIC_IRQ_PRIORITY_13			13
+#define GNVIC_IRQ_PRIORITY_14			14
+#define NVIC_IRQ_PRIORITY_15			15
 
 #endif /* INC_STM32F407_GPIO_DRIVER_H_ */

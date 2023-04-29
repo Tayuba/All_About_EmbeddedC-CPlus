@@ -14,15 +14,15 @@
 
 /*PROCESSOR DETAILS, FOR NVIC ISERx AND ICERx REGISTER ADDRESSES*/
 //NVIC ISERx REGISTER ADDRESSES
-#define NVIC_ISERO				((__vo uint32_t *)0xE000E100UL)
-#define NVIC_ISER1				((__vo uint32_t *)0xE000E104UL)
-#define NVIC_ISER2				((__vo uint32_t *)0xE000E108UL)
+#define NVIC_ISERO				((__vo uint32_t *)0xE000E100)
+#define NVIC_ISER1				((__vo uint32_t *)0xE000E104)
+#define NVIC_ISER2				((__vo uint32_t *)0xE000E108)
 //ICERx REGISTER ADDRESSES
-#define NVIC_ICERO				((__vo uint32_t *)0XE000E180UL)
-#define NVIC_ICER1				((__vo uint32_t *)0XE000E184UL)
-#define NVIC_ICER3				((__vo uint32_t *)0XE000E188UL)
+#define NVIC_ICERO				((__vo uint32_t *)0XE000E180)
+#define NVIC_ICER1				((__vo uint32_t *)0XE000E184)
+#define NVIC_ICER2				((__vo uint32_t *)0XE000E188)
 //IPR REGISTER ADDRESSES
-#define NVIC_IPR_BASE_ADDR		((__vo uint32_t *)0xE000E400UL)
+#define NVIC_IPR_BASE_ADDR		((__vo uint32_t *)0xE000E400)
 
 
 /* Base addresses of Flash SRAM1, SRAM2 and ROM memories*/
@@ -66,7 +66,7 @@
 #define USART1_BASE_ADDR 		(APB2PERIPH_BASE_ADDR + 0x1000UL)
 #define USART6_BASE_ADDR		(APB2PERIPH_BASE_ADDR + 0x1400UL)
 #define EXTI_BASE_ADDR 			(APB2PERIPH_BASE_ADDR + 0x3C00UL)
-#define SYSCFG_BASE_ADDR 		(APB2PERIPH_BASE_ADDR + 0x800UL)
+#define SYSCFG_BASE_ADDR 		(APB2PERIPH_BASE_ADDR + 0x3800UL)
 
 
 /*Register Peripherals of GPIO*/

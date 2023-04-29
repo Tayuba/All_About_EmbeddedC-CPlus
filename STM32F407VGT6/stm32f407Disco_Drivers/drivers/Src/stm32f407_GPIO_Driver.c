@@ -102,8 +102,13 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 		pGPIOHandle->pGPIOx->MODER |= temp; 														// setting
 
 	}else{
+		// Configure GPIO port to selection  in SYSCG
+
+		// Interrupt request from line x is not masked
+
 		/* Interrupt mode, at peripheral side */
 		if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode == GPIO_MODE_INP_FE_T){
+//			pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber);
 			// Falling Edge trigger configured
 			EXTI->FTSR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					    // set falling edge
 			EXTI->RTSR &= ~(1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					    // reset rising edge
@@ -119,15 +124,13 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 			EXTI->RTSR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 						 // set rising edge
 		}
 
-		// Configure GPIO port to selection  in SYSCG
-		uint8_t temp3, temp4;
+		SYSCFG_PCLK_EN();
+		uint8_t temp1, temp2;
 		uint8_t portCode = GPIO_BASE_TO_PORTCODE(pGPIOHandle->pGPIOx);								   // REturn the port code(PA...PI for the EXTI register
-		temp3 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber / 4;                                	   // Select which EXTI(0...3) register to Configure
-		temp4 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber % 4;									   // Select which EXTI?(0...15) bit to store values
-		SYSCFG_PCLK_EN();																			   // Enable SYSCFG clock
-		SYSCFG->EXTICR[temp3] = portCode << (4 * temp4);											   // Select EXTIx register and the respective bits
-
-		// Interrupt request from line x is not masked
+		temp1 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber / 4;                                	   // Select which EXTI(0...3) register to Configure
+		temp2 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber % 4;									   // Select which EXTI?(0...15) bit to store values
+																					   // Enable SYSCFG clock
+		SYSCFG->EXTICR[temp1] = (portCode << (4 * temp2));											   // Select EXTIx register and the respective bits
 		EXTI->IMR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber);
 	}
 	temp = 0;
@@ -144,11 +147,14 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	pGPIOHandle->pGPIOx->PUPDR |= temp; 																	//setting
 	temp = 0;
 
-	//Output Type
-	temp = (pGPIOHandle->pGPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 <<  pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					 // clearing
-	pGPIOHandle->pGPIOx->OTYPER |= temp; 																	 //setting
-	temp = 0;
+	if(pGPIOHandle->pGPIOx->MODER == GPIO_MODE_OUTPUT){
+		//Output Type
+		temp = (pGPIOHandle->pGPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber));
+		pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 <<  pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber); 					 // clearing
+		pGPIOHandle->pGPIOx->OTYPER |= temp; 																	 //setting
+		temp = 0;
+	}
+
 
 	//Alternative Function
 	if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinAlteFuncMode == GPIO_MODE_ALTFUNC){
@@ -245,7 +251,7 @@ void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
  *@Note									- Even though Cortex M4 has 8 Nested Vector Interrupt Controllers available (NVIC),
  *										  STM32F407 does not use more than three of this NVIC
  */
-void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis){
+void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t EnrDis){
 	if(EnrDis == ENABLE){
 		if(IRQNum <= 31){
 			// ISRE0 Register is to be programmed
@@ -253,11 +259,11 @@ void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis){
 
 		} else if(IRQNum >= 31 && IRQNum <64){
 			// ISRE1 Register is to be programmed
-			*(NVIC_ISERO) |= (1 << (IRQNum % 32));
+			*(NVIC_ISER1) |= (1 << (IRQNum % 32));
 
 		} else if(IRQNum >= 64 && IRQNum <96){
 			// ISRE2 Register is to be programmed
-			*(NVIC_ISERO) |= (1 << (IRQNum % 64));
+			*(NVIC_ISER2) |= (1 << (IRQNum % 64));
 		}
 	}else{
 		if(IRQNum <= 31){
@@ -266,11 +272,11 @@ void GPIO_InterruptConfig(uint8_t IRQNum, uint8_t IRQ_Priority, uint8_t EnrDis){
 
 		} else if(IRQNum >= 31 && IRQNum <64){
 			// ICRE1 Register is to be programmed
-			*(NVIC_ICERO) |= (1 << (IRQNum % 32));
+			*(NVIC_ICER1) |= (1 << (IRQNum % 32));
 
 		} else if(IRQNum >= 64 && IRQNum <96){
 			// ICRE2 Register is to be programmed
-			*(NVIC_ICERO) |= (1 << (IRQNum % 64));
+			*(NVIC_ICER2) |= (1 << (IRQNum % 64));
 		}
 	}
 }
@@ -297,7 +303,7 @@ void GPIO_InterruptPriorityConfig(uint8_t IRQNum, uint8_t IRQ_Priority){
 	uint8_t iprx 		 = IRQNum / 4; 																			// To select interrupt priority register
 	uint8_t iprx_section  = IRQNum % 4;       																	// To select section of selected interrupt priority register above
 	uint8_t amount_shift = (8 * iprx_section) + (8 - STM32F407_PR_BIT_IMPLEMENTED); 							// STM32F407_PR_BIT_IMPLEMENTED has 4 bit implementation of priority, MCU such as TI.
-	*(NVIC_IPR_BASE_ADDR + (iprx * 4)) |= (IRQ_Priority <<(amount_shift));
+	*(NVIC_IPR_BASE_ADDR + (iprx * 4)) = (IRQ_Priority << amount_shift);
 }
 
 // Interrupt Service Routine

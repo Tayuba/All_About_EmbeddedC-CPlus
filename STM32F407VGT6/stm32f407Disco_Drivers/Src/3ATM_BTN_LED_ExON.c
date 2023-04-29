@@ -29,20 +29,20 @@ int main(void)
 	GPIO_PeriphControl(GPIOA, ENABLE);
 	GPIO_Init(&GPIO_LED);
 
-	GPIO_BTN.pGPIOx = GPIOB;
-	GPIO_BTN.pGPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_12;
+	GPIO_BTN.pGPIOx = GPIOD;
+	GPIO_BTN.pGPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_5;
 	GPIO_BTN.pGPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_INPUT;
 	GPIO_BTN.pGPIO_PinConfig.GPIO_PinSpeed			= GPIO_OSPEED_H;
 	GPIO_BTN.pGPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PUPD_PULUP;
 
 
-	GPIO_PeriphControl(GPIOB, ENABLE);
+	GPIO_PeriphControl(GPIOD, ENABLE);
 	GPIO_Init(&GPIO_BTN);
 
     /* Loop forever */
 	while(1){
 
-		if(GPIO_ReadInputPin(GPIOB, GPIO_PIN_NO_12) == BTNPRESSED){
+		if(GPIO_ReadInputPin(GPIOD, GPIO_PIN_NO_5) == BTNPRESSED){
 			delay();
 			GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_7);
 

@@ -1,14 +1,105 @@
-23:19:09 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+08:25:21 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
 make -j16 all 
 arm-none-eabi-gcc "../drivers/Src/stm32f407_GPIO_Driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/stm32f407_GPIO_Driver.d" -MT"drivers/Src/stm32f407_GPIO_Driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407_GPIO_Driver.o"
-arm-none-eabi-gcc "../Src/3ATM_BTN_LED_ExON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/3ATM_BTN_LED_ExON.d" -MT"Src/3ATM_BTN_LED_ExON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/3ATM_BTN_LED_ExON.o"
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
 arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: stm32f407Disco_Drivers.elf
  
 arm-none-eabi-size   stm32f407Disco_Drivers.elf 
 arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
    text	   data	    bss	    dec	    hex	filename
-   2212	      8	   1568	   3788	    ecc	stm32f407Disco_Drivers.elf
+   2608	      8	   1568	   4184	   1058	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407Disco_Drivers.list
+ 
+08:25:26 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+   text	   data	    bss	    dec	    hex	filename
+   2608	      8	   1568	   4184	   1058	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+08:30:52 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
+arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407Disco_Drivers.elf
+ 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   2648	      8	   1568	   4224	   1080	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407Disco_Drivers.list
+ 
+08:32:15 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
+arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407Disco_Drivers.elf
+ 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   2732	      8	   1568	   4308	   10d4	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407Disco_Drivers.list
+ 
+08:33:05 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
+arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407Disco_Drivers.elf
+ 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   2732	      8	   1568	   4308	   10d4	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407Disco_Drivers.list
+ 
+08:33:25 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
+arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407Disco_Drivers.elf
+ 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   2648	      8	   1568	   4224	   1080	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407Disco_Drivers.list
+ 
+08:33:51 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
+arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407Disco_Drivers.elf
+ 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   2608	      8	   1568	   4184	   1058	stm32f407Disco_Drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407Disco_Drivers.list
+ 
+08:38:53 **** Incremental Build of configuration Debug for project stm32f407Disco_Drivers ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/4ATM_Interrupt_LED_ON.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/drivers/Inc" -I"D:/All_About_EmbeddedC-C++/STM32F407VGT6/stm32f407Disco_Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/4ATM_Interrupt_LED_ON.d" -MT"Src/4ATM_Interrupt_LED_ON.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/4ATM_Interrupt_LED_ON.o"
+arm-none-eabi-gcc -o "stm32f407Disco_Drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\All_About_EmbeddedC-C++\STM32F407VGT6\stm32f407Disco_Drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407Disco_Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407Disco_Drivers.elf
+ 
+arm-none-eabi-size   stm32f407Disco_Drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407Disco_Drivers.elf  > "stm32f407Disco_Drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   2608	      8	   1568	   4184	   1058	stm32f407Disco_Drivers.elf
 Finished building: default.size.stdout
  
 Finished building: stm32f407Disco_Drivers.list
