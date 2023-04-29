@@ -303,7 +303,7 @@ void GPIO_InterruptPriorityConfig(uint8_t IRQNum, uint32_t IRQ_Priority){
 	uint8_t iprx 		 = IRQNum / 4; 																			// To select interrupt priority register
 	uint8_t iprx_section  = IRQNum % 4;       																	// To select section of selected interrupt priority register above
 	uint8_t amount_shift = (8 * iprx_section) + (8 - STM32F407_PR_BIT_IMPLEMENTED); 							// STM32F407_PR_BIT_IMPLEMENTED has 4 bit implementation of priority, MCU such as TI.
-	*(NVIC_IPR_BASE_ADDR + iprx) |= (IRQ_Priority << amount_shift);
+	*(NVIC_IPR_BASE_ADDR + (iprx * 4)) = (IRQ_Priority << amount_shift);
 }
 
 // Interrupt Service Routine
