@@ -151,6 +151,7 @@ void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len){
 				byte_len --;
 				(uint16_t *)pTxBuffer++;
 			}else{
+				// 8 Bits
 				pSPIx->DR = *pTxBuffer;
 				byte_len --;
 				pTxBuffer++;
