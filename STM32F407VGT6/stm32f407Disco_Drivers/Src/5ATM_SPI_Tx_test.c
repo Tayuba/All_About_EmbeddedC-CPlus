@@ -10,7 +10,7 @@
 #include <string.h>
 #include "../drivers/Inc/stm32f407xx.h"
 
-
+/*TODO:						TEST THE SPI*/
 int main(){
 
 	return 0;
