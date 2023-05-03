@@ -1,5 +1,6 @@
-"./Src/4ATM_Interrupt_LED_ON.o"
+"./Src/5ATM_SPI_Tx_test.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f407vgtx.o"
 "./drivers/Src/stm32f407_GPIO_Driver.o"
+"./drivers/Src/stm32f407_SPI_Driver.o"

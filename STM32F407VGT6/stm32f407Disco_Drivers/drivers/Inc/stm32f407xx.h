@@ -11,8 +11,9 @@
 #include <stdint.h>
 
 #define __vo 					volatile
-
-/*PROCESSOR DETAILS, FOR NVIC ISERx AND ICERx REGISTER ADDRESSES*/
+/*************************************************************************************************************************************************
+											PROCESSOR DETAILS, FOR NVIC ISERx AND ICERx REGISTER ADDRESSES
+***************************************************************************************************************************************************/
 //NVIC ISERx REGISTER ADDRESSES
 #define NVIC_ISERO				((__vo uint32_t *)0xE000E100)
 #define NVIC_ISER1				((__vo uint32_t *)0xE000E104)
@@ -24,7 +25,9 @@
 //IPR REGISTER ADDRESSES
 #define NVIC_IPR_BASE_ADDR		((__vo uint32_t *)0xE000E400)
 
-
+/*****************************************************************************************************************************************************
+ * 													SMT32F407 BOARD DETAILS
+ * ****************************************************************************************************************************************************/
 /* Base addresses of Flash SRAM1, SRAM2 and ROM memories*/
 #define SRAM1_BASE_ADDR			0x20000000UL 		//112KB, main SRAM
 #define SRAM2_BASE_ADDR			0x2001C000UL 		//112KB x 1024 = 1C000
@@ -93,6 +96,24 @@ typedef struct{
 #define GPIOH 		((GPIO_Reg_t *)GPIOH_BASE_ADDR)
 #define GPIOI 		((GPIO_Reg_t *)GPIOI_BASE_ADDR)
 
+
+/*Register Peripherals of SIP*/
+typedef struct{
+	__vo uint32_t CR1;												 //SPI control register 1
+	__vo uint32_t CR2;												 //SPI control register 2
+	__vo uint32_t SR;												 //SPI status register
+	__vo uint32_t DR;												 //SPI data register
+	__vo uint32_t CRCPR;											 //SPI CRC polynomial register
+	__vo uint32_t RXCRCR;											 //SPI RX CRC register
+	__vo uint32_t TXCRCR;											 //SPI TX CRC register
+	__vo uint32_t I2SCFGR;											 //SPI_I2S configuration register
+	__vo uint32_t I2SPR;											 //SPI_I2S prescaler register
+}SPI_Reg_t;
+
+//SIP Peripheral definitions
+#define SPI1 		((SPI_Reg_t *)SPI1_BASE_ADDR)
+#define SPI2 		((SPI_Reg_t *)SPI2_BASE_ADDR)
+#define SPI3 		((SPI_Reg_t *)SPI3_BASE_ADDR)
 
 /*Register Peripherals of RCC*/
 typedef struct{
@@ -177,7 +198,7 @@ typedef struct{
 #define I2C2_PCLK_EN()	(RCC->APB1ENR |= (1 << 22))
 #define I2C3_PCLK_EN()	(RCC->APB1ENR |= (1 << 23))
 
-//MACRO SPIx PERIPHERALS
+//MACRO SPIx PERIPHERALS ENABLE
 #define SPI1_PCLK_EN()	(RCC->APB2ENR |= (1 << 12))
 #define SPI2_PCLK_EN()	(RCC->APB1ENR |= (1 << 14))
 #define SPI3_PCLK_EN()	(RCC->APB1ENR |= (1 << 15))
@@ -212,7 +233,7 @@ typedef struct{
 #define I2C2_PCLK_DI()	(RCC->APB1ENR &= ~(1 << 22))
 #define I2C3_PCLK_DI()	(RCC->APB1ENR &= ~(1 << 23))
 
-//MACRO SPIx PERIPHERALS
+//MACRO SPIx PERIPHERALS DISABLE
 #define SPI1_PCLK_DI()	(RCC->APB2ENR &= ~(1 << 12))
 #define SPI2_PCLK_DI()	(RCC->APB1ENR &= ~(1 << 14))
 #define SPI3_PCLK_DI()	(RCC->APB1ENR &= ~(1 << 15))
@@ -235,9 +256,18 @@ typedef struct{
 #define GPIOG_REG_RESET()			do{	(RCC->AHB1RSTR |= (1 << 6)); (RCC->AHB1RSTR &= ~(1 << 6));} while(0)
 #define GPIOH_REG_RESET()			do{	(RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7));} while(0)
 #define GPIOI_REG_RESET()			do{	(RCC->AHB1RSTR |= (1 << 8)); (RCC->AHB1RSTR &= ~(1 << 8));} while(0)
+
+// SPI RESET
+#define SPI1_REG_RESET()			do{	(RCC->APB2RSTR |= (1 << 12));  (RCC->APB2RSTR &= ~(1 << 12));} while(0)
+#define SPI2_REG_RESET()			do{	(RCC->APB1RSTR |= (1 << 14));  (RCC->APB1RSTR &= ~(1 << 14));} while(0)
+#define SPI3_REG_RESET()			do{	(RCC->APB1RSTR |= (1 << 15));  (RCC->APB1RSTR &= ~(1 << 15));} while(0)
+
 //MACRO SYSCFG PERIPHERALS
 #define SYSCFG_PCLK_DI()	(RCC->APB2ENR &= ~(1 << 14))
 
+/********************************************************************************************************************************************
+ * 														GPIO DEFINATIONS
+ * ******************************************************************************************************************************************/
 // Generic Macros
 #define ENABLE 					1
 #define DISABLE				 	0
@@ -245,6 +275,8 @@ typedef struct{
 #define RESET					DISABLE
 #define GPIO_PIN_SET			SET
 #define GPIO_PIN_RESET			RESET
+#define FLAG_RESET				RESET
+#define FLAG_SET				SET
 
 // GPIO base to Port Code Macro
 #define GPIO_BASE_TO_PORTCODE(x)		((x == GPIOA)?  0:\
@@ -269,6 +301,47 @@ typedef struct{
 // Priority amount to be shifted in STM32F407
 #define STM32F407_PR_BIT_IMPLEMENTED	4
 
-#include "stm32f407_GPIO_Driver.h"
+/********************************************************************************************************************************************************
+ * 																SPI DEFINATIONS
+ * ******************************************************************************************************************************************************/
+// SPI CR 1, Control Register Bit Positions
+#define SPI_CR1_BIT_POS_CPHA			0
+#define SPI_CR1_BIT_POS_CPOL			1
+#define SPI_CR1_BIT_POS_MSTR			2
+#define SPI_CR1_BIT_POS_BR				3
+#define SPI_CR1_BIT_POS_SPE				4
+#define SPI_CR1_BIT_POS_LSBFIRST		7
+#define SPI_CR1_BIT_POS_SSI				8
+#define SPI_CR1_BIT_POS_SSM				9
+#define SPI_CR1_BIT_POS_RXONLY			10
+#define SPI_CR1_BIT_POS_DFF				11
+#define SPI_CR1_BIT_POS_CRCNEXT			12
+#define SPI_CR1_BIT_POS_CRCEN			13
+#define SPI_CR1_BIT_POS_BIDIOE			14
+#define SPI_CR1_BIT_POS_BIDIMODE		15
 
+// SPI CR 2, Control Register Bit Positions
+#define SPI_CR2_BIT_POS_RXDMAEN			0
+#define SPI_CR2_BIT_POS_TXDMAEN			1
+#define SPI_CR2_BIT_POS_SSOE			2
+#define SPI_CR2_BIT_POS_FRF				4
+#define SPI_CR2_BIT_POS_ERRIE			5
+#define SPI_CR2_BIT_POS_RXNEIE			6
+#define SPI_CR2_BIT_POS_TXEIE			7
+
+// SPI SR , Status Register Bit Positions
+#define SPI_SR_BIT_POS_RXNE				0
+#define SPI_SR_BIT_POS_TXE				1
+#define SPI_SR_BIT_POS_CHSIDE			2
+#define SPI_SR_BIT_POS_UDR				3
+#define SPI_SR_BIT_POS_CRCERR			4
+#define SPI_SR_BIT_POS_MODF				5
+#define SPI_SR_BIT_POS_OVR				6
+#define SPI_SR_BIT_POS_BSY				7
+#define SPI_SR_BIT_POS_FRE				8
+
+
+/************************************************************** HEADER FILES OF DIFFERENT APIsn **********************************************************/
+#include "stm32f407_GPIO_Driver.h"
+#include "stm32f407_SPI_Driver.h"
 #endif /* INC_STM32F407XX_H_ */

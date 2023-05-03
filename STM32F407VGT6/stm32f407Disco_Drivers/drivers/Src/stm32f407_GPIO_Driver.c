@@ -103,9 +103,6 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 
 	}else{
 		// Configure GPIO port to selection  in SYSCG
-
-		// Interrupt request from line x is not masked
-
 		/* Interrupt mode, at peripheral side */
 		if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode == GPIO_MODE_INP_FE_T){
 //			pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber);
@@ -129,8 +126,9 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 		uint8_t portCode = GPIO_BASE_TO_PORTCODE(pGPIOHandle->pGPIOx);								   // REturn the port code(PA...PI for the EXTI register
 		temp1 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber / 4;                                	   // Select which EXTI(0...3) register to Configure
 		temp2 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber % 4;									   // Select which EXTI?(0...15) bit to store values
-																					   // Enable SYSCFG clock
+																					   	   	   	   	   // Enable SYSCFG clock
 		SYSCFG->EXTICR[temp1] = (portCode << (4 * temp2));											   // Select EXTIx register and the respective bits
+		// Interrupt request from line x is not masked
 		EXTI->IMR |= (1 << pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber);
 	}
 	temp = 0;
