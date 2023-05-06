@@ -309,7 +309,7 @@ typedef struct{
 #define SPI_CR1_BIT_POS_CPOL			1
 #define SPI_CR1_BIT_POS_MSTR			2
 #define SPI_CR1_BIT_POS_BR				3
-#define SPI_CR1_BIT_POS_SPE				4
+#define SPI_CR1_BIT_POS_SPE				6
 #define SPI_CR1_BIT_POS_LSBFIRST		7
 #define SPI_CR1_BIT_POS_SSI				8
 #define SPI_CR1_BIT_POS_SSM				9
@@ -339,6 +339,8 @@ typedef struct{
 #define SPI_SR_BIT_POS_OVR				6
 #define SPI_SR_BIT_POS_BSY				7
 #define SPI_SR_BIT_POS_FRE				8
+
+
 
 
 /************************************************************** HEADER FILES OF DIFFERENT APIsn **********************************************************/

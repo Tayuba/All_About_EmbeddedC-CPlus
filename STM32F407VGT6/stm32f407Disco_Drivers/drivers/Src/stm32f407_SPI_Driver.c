@@ -7,6 +7,18 @@
 #include "stm32f407_SPI_Driver.h"
 
 // SPI Flag Status check
+/************************************************************************************************
+ *@func name							- FlagStatus
+ *
+ *@brief								- Function to enable or disable SPI
+ *
+ *@param1								- Base Address of SPI Handle
+ *@param2								- Takes flag information to access whether is set or rest
+ *
+ *@return								- Returns True or False
+ *
+ *@Note									- none
+ */
 uint8_t FlagStatus(SPI_Reg_t *pSPIx, uint32_t FlagType){
 	// Check Flag status of the Flag Type requested
 	if(pSPIx->SR & FlagType){
@@ -15,13 +27,58 @@ uint8_t FlagStatus(SPI_Reg_t *pSPIx, uint32_t FlagType){
 
 	return FLAG_RESET;
 }
+// Enable or Disable SPI
+/************************************************************************************************
+ *@func name							- SPI_Control
+ *
+ *@brief								- Function to enable or disable SPI
+ *
+ *@param1								- Base Address of SPI Handle
+ *@param2								- Enable or Disable macro
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+void SPI_Control(SPI_Reg_t *pSPIx, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		pSPIx->CR1 |= (1 << SPI_CR1_BIT_POS_SPE);
+	}else{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_BIT_POS_SPE);
+	}
+}
+
+// Enable SSI
+/************************************************************************************************
+ *@func name							- SPI_SSI_Config
+ *
+ *@brief								- Function is used when SSM is set
+ *
+ *@param1								- Base Address of SPI Handle
+ *@param2								- Enable or Disable macro
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+void SPI_SSI_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		pSPIx->CR1 |= (1 << SPI_CR1_BIT_POS_SSI);
+	}else{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_BIT_POS_SSI);
+	}
+}
+
+
+
 //Peripheral clock setup
 /************************************************************************************************
  *@func name							- SPI_PeriphControl
  *
- *@brief								- Function to enable or disable peripherals for SPI
+ *@brief								- Function to enable or disable peripherals clock for SPI
  *
  *@param1								- Base Address of SPI Handle
+ *@param2								- Enable or Disable macro
  *
  *@return								- none
  *
@@ -64,6 +121,9 @@ void SPI_PeriphControl(SPI_Reg_t *pSPIx, uint8_t EnrDis){
  *@Note									- none
  */
 void SPI_Init(SPI_Handle_t *pSPIHandle){
+	// Enable SPI Peripheral clock
+	SPI_PeriphControl(pSPIHandle->pSPIx, ENABLE);
+
 	uint32_t temp = 0;
 	// Configure device to be Master or Slave. MSTR in SPI_CR1 bit 2
 	temp |= (pSPIHandle->pGPIO_PinConfig.SPI_DeviceMode << SPI_CR1_BIT_POS_MSTR);
@@ -124,6 +184,7 @@ void SPI_DeInit(SPI_Reg_t *pSPIx){
 	}
 }
 
+
 // Send data
 /************************************************************************************************
  *@func name							- SPI_Data_Send
@@ -131,8 +192,8 @@ void SPI_DeInit(SPI_Reg_t *pSPIx){
  *@brief								- Function Send data for SPI
  *
  *@param1								- Base Address of SPI peripheral
- *@param1								- Transmitted Buffer
- *@param1								- Number of Byte to Transmit
+ *@param2								- Transmitted Buffer
+ *@param3								- Number of Byte to Transmit
  *
  *@return								- none
  *
@@ -142,14 +203,14 @@ void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len){
 	// Check the data byte length user want send
 	while(byte_len > 0){
 		// Wait until Tx Buffer is empty
-		while(FlagStatus(pSPIx, SPI_TXE_FLAG) == FLAG_RESET){
+		while((FlagStatus(pSPIx, SPI_TXE_FLAG)) == FLAG_RESET){};
 			// Check DFF bits
-			if(pSPIx->CR1 & (1 << SPI_CR1_BIT_POS_DFF)){
+			if((pSPIx->CR1 & (1 << SPI_CR1_BIT_POS_DFF))){
 				// 16 Bits
-				pSPIx->DR = *(uint16_t *)pTxBuffer;
+				pSPIx->DR = *((uint16_t*)pTxBuffer);
 				byte_len --;
 				byte_len --;
-				(uint16_t *)pTxBuffer++;
+				(uint16_t*)pTxBuffer++;
 			}else{
 				// 8 Bits
 				pSPIx->DR = *pTxBuffer;
@@ -157,7 +218,6 @@ void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len){
 				pTxBuffer++;
 
 			}
-		}
 
 	}
 }
@@ -169,8 +229,8 @@ void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len){
  *@brief								- Function Receive data for SPI
  *
  *@param1								- Base Address of SPI peripheral
- *@param1								- Received Buffer
- *@param1								- Number of Byte to Receive
+ *@param2								- Received Buffer
+ *@param3								- Number of Byte to Receive
  *
  *@return								- none
  *
@@ -187,7 +247,7 @@ void SPI_Data_Receive(SPI_Reg_t *pSPIx, uint8_t *pRxBuffer, uint32_t dyte_len){
  *@brief								- Function Configure Interrupt for SPI
  *
  *@param1								- Interrupt number
- *@param1								- Enable or Disable Interrupt
+ *@param2								- Enable or Disable Interrupt
  *
  *@return								- none
  *
@@ -220,7 +280,7 @@ void SPI_IRQHandler(SPI_Handle_t *pSPIHandle){
  *@brief								- Function Configure Interrupt for SPI
  *
  *@param1								- Interrupt number
- *@param1								- Priority of Interrupt
+ *@param2								- Priority of Interrupt
  *
  *@return								- none
  *

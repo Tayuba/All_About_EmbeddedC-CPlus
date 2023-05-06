@@ -94,6 +94,8 @@ void GPIO_PeriphControl(GPIO_Reg_t *pGPIOx, uint8_t EnrDis){
  *@Note									- none
  */
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
+	// Enable Peripheral clock
+	GPIO_PeriphControl(pGPIOHandle->pGPIOx, ENABLE);
 	uint32_t temp = 0; //hold register mode temporary
 	if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG){
 		//Mode
@@ -155,7 +157,7 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 
 
 	//Alternative Function
-	if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinAlteFuncMode == GPIO_MODE_ALTFUNC){
+	if(pGPIOHandle->pGPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFUNC){
 		uint8_t temp1, temp2;
 		temp1 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber / 8;
 		temp2 = pGPIOHandle->pGPIO_PinConfig.GPIO_PinNumber % 8;
@@ -206,12 +208,37 @@ void GPIO_DeInit(GPIO_Reg_t *pGPIOx){
 	}
 }
 
-// Read and Write Data
+// Read Data
+/**********************************************************************************************
+*@func name								- GPIO_ReadInputPin
+*
+*@brief									- Function reads the values in a given GPIO pin
+*
+*@param1								- Base Address of GPIO peripheral
+*@param2								- GPIO Pin number
+*
+*@return								- Return the pin value
+*
+*@Note									- none
+*/
 uint8_t GPIO_ReadInputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
 	uint8_t IDR_value;
 	IDR_value = (uint8_t)(pGPIOx->IDR >> PinNum & 0x00000001);
 	return IDR_value;
 }
+
+/**********************************************************************************************
+*@func name								- GPIO_ReadInputPort
+*
+*@brief									- Function reads the values in GPIO ports
+*
+*@param1								- Base Address of GPIO peripheral
+*@param2								- GPIO Port number
+*
+*@return								- Return the port values
+*
+*@Note									- none
+*/
 uint16_t GPIO_ReadInputPort(GPIO_Reg_t *pGPIOx){
 	uint16_t PORT_value;
 	PORT_value = (uint16_t)(pGPIOx->IDR);
@@ -219,6 +246,19 @@ uint16_t GPIO_ReadInputPort(GPIO_Reg_t *pGPIOx){
 }
 
 // Write Data for Pin or/and  Port
+/**********************************************************************************************
+*@func name								- GPIO_WriteOutputPin
+*
+*@brief									- Function writes values in GPIO pin
+*
+*@param1								- Base Address of GPIO peripheral
+*@param2								- GPIO Pin number
+*@param3								- Value to be written
+*
+*@return								- none
+*
+*@Note									- none
+*/
 void GPIO_WriteOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum, uint8_t Val){
 	if(Val == GPIO_PIN_SET){
 		pGPIOx->ODR |= (1 << PinNum);
@@ -226,9 +266,35 @@ void GPIO_WriteOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum, uint8_t Val){
 		pGPIOx->ODR &= ~(1 << PinNum);
 	}
 }
+
+/**********************************************************************************************
+*@func name								- GPIO_WriteOutputPort
+*
+*@brief									- Function writes values in GPIO port
+*
+*@param1								- Base Address of GPIO peripheral
+*@param2								- Value to be written
+*
+*@return								- none
+*
+*@Note									- none
+*/
 void GPIO_WriteOutputPort(GPIO_Reg_t *pGPIOx, uint8_t Val){
 	pGPIOx->ODR = Val;
 }
+
+/**********************************************************************************************
+*@func name								- GPIO_ToggleOutputPin
+*
+*@brief									- Function toggles value in GPIO pin from high to low or vice versa
+*
+*@param1								- Base Address of GPIO peripheral
+*@param2								- GPIO Pin number
+*
+*@return								- none
+*
+*@Note									- none
+*/
 void GPIO_ToggleOutputPin(GPIO_Reg_t *pGPIOx, uint8_t PinNum){
 	pGPIOx->ODR ^= (1 << PinNum);
 }
@@ -305,6 +371,17 @@ void GPIO_InterruptPriorityConfig(uint8_t IRQNum, uint32_t IRQ_Priority){
 }
 
 // Interrupt Service Routine
+/**********************************************************************************************
+*@func name								- GPIO_IRQHandler
+*
+*@brief									- Function handles interrupt service routine
+*
+*@param1								- GPIO Pin number
+*
+*@return								- none
+*
+*@Note									- none
+*/
 void GPIO_IRQHandler(uint8_t PinNum){
 	// checking the EXTI PR register corresponding to the pin number, set or not
 	if(EXTI->PR & (1 << PinNum)){

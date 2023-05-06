@@ -36,9 +36,18 @@ typedef struct {
 //Peripheral clock setup
 void SPI_PeriphControl(SPI_Reg_t *pSPIx, uint8_t EnrDis);
 
+// SPI Flag Status check
+uint8_t FlagStatus(SPI_Reg_t *pSPIx, uint32_t FlagType);
+
+// SPI Control Enable or Disable
+void SPI_Control(SPI_Reg_t *pSPIx, uint8_t EnrDis);
+
 // Initialize and De-Initialize
 void SPI_Init(SPI_Handle_t *pSPIHandle);
 void SPI_DeInit(SPI_Reg_t *pSPIx);
+
+// SSI Enable
+void SPI_SSI_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis);
 
 // Receive and Send data
 void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len);
@@ -89,5 +98,7 @@ void SPI_InterruptPriorityConfig(uint8_t IRQNum ,uint32_t IRQ_Priority);
 #define SPI_TXE_FLAG						(1 << SPI_SR_BIT_POS_TXE)
 #define SPI_RXNE_FLAG						(1 << SPI_SR_BIT_POS_RXNE)
 #define SPI_BSY_FLAG						(1 << SPI_SR_BIT_POS_BSY)
+
+
 
 #endif /* INC_STM32F407_SPI_DRIVER_H_ */
