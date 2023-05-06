@@ -192,7 +192,7 @@ void SPI_DeInit(SPI_Reg_t *pSPIx){
  *@brief								- Function Send data for SPI
  *
  *@param1								- Base Address of SPI peripheral
- *@param2								- Transmitted Buffer
+ *@param2								- Buffer Transmitted
  *@param3								- Number of Byte to Transmit
  *
  *@return								- none
