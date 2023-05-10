@@ -27,6 +27,12 @@ typedef struct{
 typedef struct {
 	SPI_Reg_t 			*pSPIx;   					// Holds base address of SPI to which the pin belongs
 	SPI_Config		pGPIO_PinConfig;				// Holds SPI pin configuration settings
+	uint8_t			*pTxBuffer;						// Store Tx Buffer address
+	uint8_t			*pRxBuffer;						// Store Rx Buffer address
+	uint8_t			 TxLen;							// Store length of Tx
+	uint8_t			 RxLen;							// Store length of Rx
+	uint8_t			 TxState;						// Store State of Tx
+	uint8_t			 RxState;						// Store State of Rx
 }SPI_Handle_t;
 
 /*************************************************************************************************************************
@@ -53,10 +59,25 @@ void SPI_SSI_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis);
 void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len);
 void SPI_Data_Receive(SPI_Reg_t *pSPIx, uint8_t *pRxBuffer, uint32_t byte_len);
 
+uint8_t SPI_Data_SendIntp(SPI_Handle_t *pSPIHandle, uint8_t *pTxBuffer, uint32_t byte_len);
+uint8_t SPI_Data_ReceiveIntp(SPI_Handle_t *pSPIHandle, uint8_t *pRxBuffer, uint32_t byte_len);
+
 // Interrupt Configuration and Interrupt Service Routine Handling
 void SPI_InterruptConfig(uint8_t IRQNum, uint8_t EnrDis);
 void SPI_IRQHandler(SPI_Handle_t *pSPIHandle);
 void SPI_InterruptPriorityConfig(uint8_t IRQNum ,uint32_t IRQ_Priority);
+
+// OVR clear
+void SPI_OVR_Clear(SPI_Reg_t *pSPIx);
+
+// Close and Finish transmission
+void SPI_Close_Finish_Transmission(SPI_Handle_t *pSPIHandle);
+
+// Close and Finish reception
+void SPI_Close_Finish_Reception(SPI_Handle_t *pSPIHandle);
+
+// Application call back
+void spi_appEvencallBack(SPI_Handle_t *pSPIHandle, uint8_t Event);
 
 //@SPI_DEVICE_MODE
 #define SLAVE_DEVICE_MODE_SPI				0
@@ -99,6 +120,14 @@ void SPI_InterruptPriorityConfig(uint8_t IRQNum ,uint32_t IRQ_Priority);
 #define SPI_RXNE_FLAG						(1 << SPI_SR_BIT_POS_RXNE)
 #define SPI_BSY_FLAG						(1 << SPI_SR_BIT_POS_BSY)
 
+// SPI Application States
+#define SPI_READY							0
+#define SPI_BUSY_IN_RX						1
+#define SPI_BUSY_IN_TX						2
 
+// SPI Events
+#define TE_COMPLT							0
+#define RE_COMPLT							1
+#define OVR_COMPLT							2
 
 #endif /* INC_STM32F407_SPI_DRIVER_H_ */

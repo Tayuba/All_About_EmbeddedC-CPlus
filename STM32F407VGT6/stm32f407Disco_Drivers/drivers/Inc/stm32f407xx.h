@@ -9,7 +9,7 @@
 #define INC_STM32F407XX_H_
 
 #include <stdint.h>
-
+#include <stddef.h>
 #define __vo 					volatile
 /*************************************************************************************************************************************************
 											PROCESSOR DETAILS, FOR NVIC ISERx AND ICERx REGISTER ADDRESSES
@@ -289,7 +289,7 @@ typedef struct{
 										(x ==  GPIOH) ? 7:\
 										(x ==  GPIOI) ? 8:0)
 
-// Interrupt Request (IRQ) Number
+// Interrupt Request (IRQ) Number For GPIO
 #define IRQ_EXTI0						6
 #define IRQ_EXTI1						7
 #define IRQ_EXTI2						8
@@ -297,6 +297,11 @@ typedef struct{
 #define IRQ_EXTI4						10
 #define IRQ_EXTI9_5						23
 #define IRQ_EXTI15_10					40
+
+// Interrupt Request (IRQ) Number For SPI
+#define IRQ_SPI1						32
+#define IRQ_SPI2						36
+#define IRQ_SPI3						51
 
 // Priority amount to be shifted in STM32F407
 #define STM32F407_PR_BIT_IMPLEMENTED	4

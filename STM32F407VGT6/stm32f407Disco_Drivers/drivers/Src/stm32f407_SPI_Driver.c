@@ -5,7 +5,9 @@
  *      Author: ayuba
  */
 #include "stm32f407_SPI_Driver.h"
-
+static void spi_rxneInterrupt_Handle(SPI_Handle_t *pSPIHandle);;
+static void spi_txeInterrupt_Handle(SPI_Handle_t *pSPIHandle);
+static void spi_ovrInterrupt_Handle(SPI_Handle_t *pSPIHandle);
 // SPI Flag Status check
 /************************************************************************************************
  *@func name							- FlagStatus
@@ -240,6 +242,72 @@ void SPI_Data_Receive(SPI_Reg_t *pSPIx, uint8_t *pRxBuffer, uint32_t dyte_len){
 
 }
 
+// Send data With Interrupt capability
+/************************************************************************************************
+ *@func name							- SPI_Data_SendIntp
+ *
+ *@brief								- Function Send data for SPI with interrupt
+ *
+ *@param1								- Base Address of SPI Handle
+ *@param2								- Buffer Transmitted
+ *@param3								- Number of Byte to Transmit
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+uint8_t SPI_Data_SendIntp(SPI_Handle_t *pSPIHandle, uint8_t *pTxBuffer, uint32_t byte_len){
+	// Check state first
+	uint8_t state = pSPIHandle->TxState;
+
+	if(state != SPI_BUSY_IN_TX){
+		// Save Tx Buffer address
+		pSPIHandle->pTxBuffer   = pTxBuffer;
+		// Save Byte length
+		pSPIHandle->TxLen	    = byte_len;
+		// Mark the SPI transmission as busy
+	    pSPIHandle->TxState	    = SPI_BUSY_IN_TX;
+		// Enable TXEIE
+		pSPIHandle->pSPIx->CR2 |= (1 << SPI_CR2_BIT_POS_TXEIE);
+	}
+	return state;
+
+}
+
+// Receive data With Interrupt capability
+/************************************************************************************************
+ *@func name							- SPI_Data_ReceiveIntp
+ *
+ *@brief								- Function Receive data for SPI
+ *
+ *@param1								- Base Address of SPI Handle
+ *@param2								- Received Buffer
+ *@param3								- Number of Byte to Receive
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+uint8_t SPI_Data_ReceiveIntp(SPI_Handle_t *pSPIHandle, uint8_t *pRxBuffer, uint32_t byte_len){
+	// Check state first
+	uint8_t state = pSPIHandle->RxState;
+
+	if(state != SPI_BUSY_IN_RX){
+		// Save Tx Buffer address
+		pSPIHandle->pRxBuffer   = pRxBuffer;
+		// Save Byte length
+		pSPIHandle->RxLen 	    = byte_len;
+		// Mark the SPI transmission as busy
+		pSPIHandle->RxState	    = SPI_BUSY_IN_RX;
+		// Enable TXEIE
+		pSPIHandle->pSPIx->CR2 |= (1 << SPI_CR2_BIT_POS_RXNEIE);
+	}
+	return state;
+
+}
+
+
+
 // Interrupt Configuration
 /************************************************************************************************
  *@func name							- SPI_InterruptConfig
@@ -254,8 +322,123 @@ void SPI_Data_Receive(SPI_Reg_t *pSPIx, uint8_t *pRxBuffer, uint32_t dyte_len){
  *@Note									- none
  */
 void SPI_InterruptConfig(uint8_t IRQNum, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		if(IRQNum <= 31){
+			// ISRE0 Register is to be programmed
+			*(NVIC_ISERO) |= (1 << IRQNum);
+
+		} else if(IRQNum >= 31 && IRQNum <64){
+			// ISRE1 Register is to be programmed
+			*(NVIC_ISER1) |= (1 << (IRQNum % 32));
+
+		} else if(IRQNum >= 64 && IRQNum <96){
+			// ISRE2 Register is to be programmed
+			*(NVIC_ISER2) |= (1 << (IRQNum % 64));
+		}
+	}else{
+		if(IRQNum <= 31){
+			// ICRE0 Register is to be programmed
+			*(NVIC_ICERO) |= (1 << (IRQNum % 32));
+
+		} else if(IRQNum >= 31 && IRQNum <64){
+			// ICRE1 Register is to be programmed
+			*(NVIC_ICER1) |= (1 << (IRQNum % 32));
+
+		} else if(IRQNum >= 64 && IRQNum <96){
+			// ICRE2 Register is to be programmed
+			*(NVIC_ICER2) |= (1 << (IRQNum % 64));
+		}
+	}
+}
+
+// OVR clear
+void SPI_OVR_Clear(SPI_Reg_t *pSPIx){
+	uint8_t tempRead;
+	tempRead = pSPIx->DR;
+	tempRead = pSPIx->SR;
+	(void)tempRead;
+}
+
+// Close and Finish transmission
+void SPI_Close_Finish_Transmission(SPI_Handle_t *pSPIHandle){
+	/*  Finished spi transmission */
+	// Buffer empty, hence no more data to send
+	pSPIHandle->pSPIx->SR &= ~(1 << SPI_CR2_BIT_POS_TXEIE);
+	pSPIHandle->pTxBuffer  = NULL;
+	pSPIHandle->TxLen  	   = 0;
+	pSPIHandle->TxState    = SPI_READY;
 
 }
+
+// Close and Finish reception
+void SPI_Close_Finish_Reception(SPI_Handle_t *pSPIHandle){
+	/* Finished spi reception */
+	// Buffer empty, hence no more data to send
+	pSPIHandle->pSPIx->SR &= ~(1 << SPI_CR2_BIT_POS_RXNEIE);
+	pSPIHandle->pRxBuffer  = NULL;
+	pSPIHandle->RxLen  	   = 0;
+	pSPIHandle->RxState    = SPI_READY;
+}
+
+
+
+
+// IRQ Helping Functions
+static void spi_rxneInterrupt_Handle(SPI_Handle_t *pSPIHandle){
+	// Check DFF bits
+	if(pSPIHandle->pSPIx->CR1 & (1 << SPI_CR1_BIT_POS_DFF)){
+		*((uint16_t*)pSPIHandle->pRxBuffer) = (uint16_t)pSPIHandle->pSPIx->DR;
+		pSPIHandle->RxLen--;
+		pSPIHandle->RxLen--;
+		(uint16_t*)pSPIHandle->pRxBuffer--;
+	}else{
+		*(pSPIHandle->pRxBuffer) = (uint8_t)pSPIHandle->pSPIx->DR;
+		pSPIHandle->RxLen--;
+		(uint8_t*)pSPIHandle->pRxBuffer--;
+	}
+
+	if(!(pSPIHandle->RxLen)){
+		/* Finished spi reception */
+		// Buffer empty, hence no more data to send
+		SPI_Close_Finish_Reception(pSPIHandle);
+		spi_appEvencallBack(pSPIHandle, RE_COMPLT);
+	}
+}
+static void spi_txeInterrupt_Handle(SPI_Handle_t *pSPIHandle){
+	// Check DFF bits
+	if(pSPIHandle->pSPIx->CR1 & (1 << SPI_CR1_BIT_POS_DFF)){
+		// 16 Bits
+		pSPIHandle->pSPIx->DR = *((uint16_t*)pSPIHandle->pTxBuffer);
+		pSPIHandle->TxLen--;
+		pSPIHandle->TxLen--;
+		(uint16_t*)pSPIHandle->pTxBuffer++;
+
+	}else{
+		// 8 Bits
+		pSPIHandle->pSPIx->DR = *pSPIHandle->pTxBuffer;
+		pSPIHandle->TxLen--;
+		pSPIHandle->pTxBuffer++;
+	}
+
+	if(!(pSPIHandle->TxLen)){
+		/*  Finished spi transmission */
+		// Buffer empty, hence no more data to send
+		SPI_Close_Finish_Transmission(pSPIHandle);
+		spi_appEvencallBack(pSPIHandle, TE_COMPLT);
+	}
+
+}
+static void spi_ovrInterrupt_Handle(SPI_Handle_t *pSPIHandle){
+	// clear OVR flag and send information to application
+	uint8_t tempRead;
+	if(pSPIHandle->TxState != SPI_BUSY_IN_TX){
+		tempRead = pSPIHandle->pSPIx->DR;
+		tempRead = pSPIHandle->pSPIx->SR;
+	}(void)tempRead;
+
+	spi_appEvencallBack(pSPIHandle, OVR_COMPLT);
+}
+
 
 // Interrupt Service Routine Handling
 /************************************************************************************************
@@ -270,6 +453,35 @@ void SPI_InterruptConfig(uint8_t IRQNum, uint8_t EnrDis){
  *@Note									- none
  */
 void SPI_IRQHandler(SPI_Handle_t *pSPIHandle){
+	/* Check where interrupt occurred */
+	uint8_t temp1, temp2;
+	// At RXNE?
+	temp1 = pSPIHandle->pSPIx->SR & (1 << SPI_SR_BIT_POS_RXNE);
+	temp2 = pSPIHandle->pSPIx->CR2 & (1 << SPI_CR2_BIT_POS_RXNEIE);
+
+	if(temp1 && temp2){
+		// Then Handle RXNE
+		spi_rxneInterrupt_Handle(pSPIHandle);
+	}
+
+	// At TXE?
+	temp1 = pSPIHandle->pSPIx->SR & (1 << SPI_SR_BIT_POS_TXE);
+	temp2 = pSPIHandle->pSPIx->CR2 & (1 << SPI_CR2_BIT_POS_TXEIE);
+
+	if(temp1 && temp2){
+		// Then Handle TXE
+		spi_txeInterrupt_Handle(pSPIHandle);
+	}
+
+
+	// At OVR?
+	temp1 = pSPIHandle->pSPIx->SR & (1 << SPI_SR_BIT_POS_OVR);
+	temp2 = pSPIHandle->pSPIx->CR2 & (1 << SPI_CR2_BIT_POS_RXNEIE);
+
+	if(temp1 && temp2){
+		// Then Handle OVR
+		spi_ovrInterrupt_Handle(pSPIHandle);
+	}
 
 }
 
@@ -287,5 +499,13 @@ void SPI_IRQHandler(SPI_Handle_t *pSPIHandle){
  *@Note									- none
  */
 void SPI_InterruptPriorityConfig(uint8_t IRQNum ,uint32_t IRQ_Priority){
+	uint8_t iprx 		 = IRQNum / 4; 																			// To select interrupt priority register
+	uint8_t iprx_section  = IRQNum % 4;       																	// To select section of selected interrupt priority register above
+	uint8_t amount_shift = (8 * iprx_section) + (8 - STM32F407_PR_BIT_IMPLEMENTED); 							// STM32F407_PR_BIT_IMPLEMENTED has 4 bit implementation of priority, MCU such as TI.
+	*(NVIC_IPR_BASE_ADDR + iprx) |= (IRQ_Priority << amount_shift);
+}
+
+
+__attribute__((weak)) void spi_appEvencallBack(SPI_Handle_t *pSPIHandle, uint8_t Event){
 
 }
