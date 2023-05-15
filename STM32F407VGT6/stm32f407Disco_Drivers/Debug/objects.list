@@ -1,4 +1,4 @@
-"./Src/5ATM_SPI_Tx_test.o"
+"./Src/7ATM_SPI_RX_Arduino.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f407vgtx.o"

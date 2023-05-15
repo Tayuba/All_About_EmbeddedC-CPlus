@@ -52,8 +52,11 @@ void SPI_Control(SPI_Reg_t *pSPIx, uint8_t EnrDis);
 void SPI_Init(SPI_Handle_t *pSPIHandle);
 void SPI_DeInit(SPI_Reg_t *pSPIx);
 
-// SSI Enable
+// SSI Control
 void SPI_SSI_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis);
+
+// SSOE Control
+void SPI_SSOE_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis);
 
 // Receive and Send data
 void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len);

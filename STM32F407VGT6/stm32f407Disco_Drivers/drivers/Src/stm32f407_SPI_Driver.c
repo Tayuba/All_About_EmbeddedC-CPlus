@@ -50,7 +50,7 @@ void SPI_Control(SPI_Reg_t *pSPIx, uint8_t EnrDis){
 	}
 }
 
-// Enable SSI
+// Control SSI
 /************************************************************************************************
  *@func name							- SPI_SSI_Config
  *
@@ -71,7 +71,26 @@ void SPI_SSI_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis){
 	}
 }
 
-
+// Control SSOE
+/************************************************************************************************
+ *@func name							- SPI_SSOE_Config
+ *
+ *@brief								- Function is used when SSM is not set
+ *
+ *@param1								- Base Address of SPI Handle
+ *@param2								- Enable or Disable macro
+ *
+ *@return								- none
+ *
+ *@Note									- none
+ */
+void SPI_SSOE_Config(SPI_Reg_t *pSPIx, uint8_t EnrDis){
+	if(EnrDis == ENABLE){
+		pSPIx->CR2 |= (1 << SPI_CR2_BIT_POS_SSOE);
+	}else{
+		pSPIx->CR2 &= ~(1 << SPI_CR2_BIT_POS_SSOE);
+	}
+}
 
 //Peripheral clock setup
 /************************************************************************************************
@@ -208,13 +227,13 @@ void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len){
 		while((FlagStatus(pSPIx, SPI_TXE_FLAG)) == FLAG_RESET){};
 			// Check DFF bits
 			if((pSPIx->CR1 & (1 << SPI_CR1_BIT_POS_DFF))){
-				// 16 Bits
+				// Load 16 Bits data from Tx Buffer to DR
 				pSPIx->DR = *((uint16_t*)pTxBuffer);
 				byte_len --;
 				byte_len --;
 				(uint16_t*)pTxBuffer++;
 			}else{
-				// 8 Bits
+				// Load 8 Bits data from Tx Buffer to DR
 				pSPIx->DR = *pTxBuffer;
 				byte_len --;
 				pTxBuffer++;
@@ -238,8 +257,26 @@ void SPI_Data_Send(SPI_Reg_t *pSPIx, uint8_t *pTxBuffer, uint32_t byte_len){
  *
  *@Note									- none
  */
-void SPI_Data_Receive(SPI_Reg_t *pSPIx, uint8_t *pRxBuffer, uint32_t dyte_len){
+void SPI_Data_Receive(SPI_Reg_t *pSPIx, uint8_t *pRxBuffer, uint32_t byte_len){
+	while(byte_len > 0){
+		// Wait until Rx Buffer is not empty
+		while((FlagStatus(pSPIx, SPI_RXNE_FLAG)) == FLAG_RESET){};
+			// Check DFF bits
+			if((pSPIx->CR1 & (1 << SPI_CR1_BIT_POS_DFF))){
+				// Load 16 Bits from DR to Rx Buffer
+				*((uint16_t*)pRxBuffer) = (uint16_t)pSPIx->DR;
+				byte_len --;
+				byte_len --;
+				(uint16_t*)pRxBuffer++;
+			}else{
+				// Load 8 Bits from DR to Rx Buffer
+				*pRxBuffer = pSPIx->DR ;
+				byte_len --;
+				pRxBuffer++;
 
+			}
+
+	}
 }
 
 // Send data With Interrupt capability

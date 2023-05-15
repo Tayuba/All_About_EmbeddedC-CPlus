@@ -5,17 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/5ATM_SPI_Tx_test.c \
+../Src/7ATM_SPI_RX_Arduino.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c 
 
 OBJS += \
-./Src/5ATM_SPI_Tx_test.o \
+./Src/7ATM_SPI_RX_Arduino.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o 
 
 C_DEPS += \
-./Src/5ATM_SPI_Tx_test.d \
+./Src/7ATM_SPI_RX_Arduino.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d 
 
@@ -27,7 +27,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/5ATM_SPI_Tx_test.cyclo ./Src/5ATM_SPI_Tx_test.d ./Src/5ATM_SPI_Tx_test.o ./Src/5ATM_SPI_Tx_test.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+	-$(RM) ./Src/7ATM_SPI_RX_Arduino.cyclo ./Src/7ATM_SPI_RX_Arduino.d ./Src/7ATM_SPI_RX_Arduino.o ./Src/7ATM_SPI_RX_Arduino.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
 
 .PHONY: clean-Src
 
